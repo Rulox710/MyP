@@ -1,29 +1,22 @@
 package main;
+
 import escritura.Escritor;
 import recursos.interfaces.Suscriptor;
 import recursos.interfaces.Servicio;
 import recursos.suscriptores.Persona;
-import recursos.servicios.hammazon.*;
-import recursos.servicios.twitsh.*;
-import recursos.servicios.yutube.*;
-import recursos.servicios.netflis.*;
-import recursos.servicios.spootify.*;
+import recursos.servicios.hammazon.Hammazon;
+import recursos.servicios.hammazon.cobro.HammazonPremium;
+import recursos.servicios.hammazon.cobro.HammazonNormal;
+import recursos.servicios.MetodoPago;
 
 import java.util.ArrayList;
  
 public class Main{
 	
-	public static Servicio hn = new HammazonNormal();
-	public static Servicio hp = new HammazonPremium();
-	public static Servicio tn = new TwitshNormal();
-	public static Servicio tp = new TwitshPremium();
-	public static Servicio ytg = new YuTubeGratis();
-	public static Servicio ytp = new YuTubePremium();
-	public static Servicio nu = new NetflisUno();
-	public static Servicio nd = new NetflisDos();
-	public static Servicio nt = new NetflisTres();
-	public static Servicio sn = new SpootifyNormal();
-	public static Servicio sp = new SpootifyPremium();
+	public static Servicio hammazon = new Hammazon();
+	
+	public static MetodoPago hn = new HammazonNormal();
+	public static MetodoPago hp = new HammazonPremium();
 	
 	public static void main(String[] args){
 		
@@ -34,10 +27,11 @@ public class Main{
 		System.out.println("Bienevenido a la simulacion de la practica 1");
 		System.out.println("Selecctione una de las opciones:");
 		
+		do {
 		System.out.println("1. Simulacion guiada(la indicada en la practica)");
 		System.out.println("2. Simacion en tiempo real");
+		System.out.println("3. Terminar el programa");
 		
-		do {
 			do {
 				tecleado = Escritor.leerCadena();
 				if (Escritor.validarNumerico(tecleado)){
@@ -69,29 +63,29 @@ public class Main{
 	public static void porDefecto(){
 		ArrayList<Suscriptor> personas = new ArrayList<Suscriptor>();
 		personas.add(new Persona("Alicia", 500));
-		/*personas.add(new Persona("Bob", 70));
-		personas.add(new Persona("Cesar", 40));
+		personas.add(new Persona("Bob", 10));//70
+		/*personas.add(new Persona("Cesar", 40));
 		personas.add(new Persona("Diego", 200));
 		personas.add(new Persona("Erika", 220));*/
 		
 		int dias = 5;
 		int i = 0;
 		
-		System.out.println(personas.get(0).iniciarSuscripcion(hp));
+		personas.get(0).iniciarSuscripcion(hammazon, hp);
+		personas.get(1).iniciarSuscripcion(hammazon, hn);/*
 		System.out.println(personas.get(0).iniciarSuscripcion(tp));
 		System.out.println(personas.get(0).iniciarSuscripcion(ytp));
 		System.out.println(personas.get(0).iniciarSuscripcion(nt));
-		System.out.println(personas.get(0).iniciarSuscripcion(sp));
+		System.out.println(personas.get(0).iniciarSuscripcion(sp));*/
 		
 		while(i++ < 5){
-			personas.get(0).renovarSuscripcion(hp);
-			personas.get(0).renovarSuscripcion(tp);
-			personas.get(0).renovarSuscripcion(ytp);
-			personas.get(0).renovarSuscripcion(nt);
-			personas.get(0).renovarSuscripcion(sp);
-			System.out.println(personas.get(0).obtenerNombre() + " tiene " + personas.get(0).obtenerDinero());
+			hammazon.pago();
+			if(i==4) personas.get(0).terminarSuscripcion(hammazon);
+			System.out.println(personas.get(0).obtenerDinero());
+			System.out.println(personas.get(1).obtenerDinero());
 		}
-		System.exit(0);
+		
+		System.out.println();
 	}
 	
 	public static void ejecutar(){

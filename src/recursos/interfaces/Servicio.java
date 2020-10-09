@@ -1,15 +1,17 @@
 package recursos.interfaces;
 
+import recursos.Contrato;
+
 public interface Servicio {
 
-	public abstract String agregarSub(Suscriptor sub);
+	public abstract boolean agregarSuscriptor(Contrato con);
 
-	public abstract String quitarSub(Suscriptor sub);
+	public abstract boolean eliminarSuscriptor(Contrato con);
 	
-	//public abstract boolean sePuedeCobrar(Suscriptor sub);
-		
-	public abstract String cobrar(Suscriptor sub);
+	public abstract void pago();
 	
-	public abstract String notificar();
+	public abstract void notificar();
+	
+	public abstract boolean equals(Object obj);
 	
 }

@@ -1,18 +1,21 @@
 package recursos.interfaces;
 
+import recursos.servicios.MetodoPago;
+
 public interface Suscriptor {
 
-	public abstract String iniciarSuscripcion(Servicio ser);
+	public abstract boolean iniciarSuscripcion(Servicio ser, MetodoPago mp);
 	
-	public abstract void renovarSuscripcion(Servicio ser);
+	public abstract boolean terminarSuscripcion(Servicio ser);
 	
-	public abstract String terminarSuscripcion(Servicio ser);
+	public abstract void recibirNotificaciones();
 	
-	public abstract void recibirNotificaciones(String str);
-
 	public abstract String obtenerNombre();
-	
+
 	public abstract double obtenerDinero();
 	
 	public abstract void asignarDinero(double dinero);
+	
+	public abstract boolean equals(Object obj);
+
 }

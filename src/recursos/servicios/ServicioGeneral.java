@@ -1,5 +1,6 @@
 package recursos.servicios;
 
+import recursos.Contrato;
 import recursos.interfaces.Servicio;
 import recursos.interfaces.Suscriptor;
 
@@ -9,69 +10,74 @@ public abstract class ServicioGeneral implements Servicio {
 	
 	protected String nombreSer;
 	
-	protected ArrayList<Suscriptor> directorioPermanente;
-	protected ArrayList<Suscriptor> directorioActual;
+	protected ArrayList<Contrato> directorioPermanente;
+	protected ArrayList<Contrato> directorioActual;
 	
-	public ServicioGeneral(String nombreSer) {
-		this.nombreSer = nombreSer;
-		directorioPermanente = new ArrayList<Suscriptor>();
-		directorioActual = new ArrayList<Suscriptor>();
-	}
-	
-	public String agregarSub(Suscriptor sub) {
-		String mensaje = "";
-		if(sePuedeCobrar(sub)){
-			if(agregarNuevo(sub)){
-				if(revisarPermanencia(sub)){
-					mensaje += "Bienvenido de vuelta, " + sub.obtenerNombre() + ", a " + nombreSer;
+	public boolean agregarSuscriptor(Contrato con) {
+		String mensaje;
+		boolean valor = false;
+		Suscriptor s = con.obtenerCliente();
+		if(con.obtenerTipo().sePuedeCobrar(con)){
+			if(agregarNuevo(con)){
+				valor = true;
+				if(revisarPermanencia(con)){
+					mensaje = "Bienvenido de vuelta, " + s.obtenerNombre() + ", a " + nombreSer;
 				} else {
-					mensaje += "Bienvenido a " + nombreSer + ", " + sub.obtenerNombre();
+					mensaje = "Bienvenido a " + nombreSer + ", " + s.obtenerNombre();
 				}
 			} else {
-				mensaje += "Ya cuenta con el servicio de " + nombreSer;
+				mensaje = "Ya cuenta con el servicio de " + nombreSer;
 			}
 		} else {
-			mensaje += "No cuenta con el fondo necesario para contratar el servicio unu";
+			mensaje = "No cuenta con el fondo necesario para contratar el servicio unu";
 		}
-		return mensaje;
+		System.out.println(mensaje);
+		return valor;
 	}
 	
-	protected boolean agregarNuevo(Suscriptor sub) {
-		if(directorioActual.indexOf(sub)==-1) return false;
-		directorioActual.add(sub);
+	protected boolean agregarNuevo(Contrato con) {
+		if(directorioActual.indexOf(con) != -1) return false;
+		directorioActual.add(con);
 		return true;
 	}
 	
-	protected boolean revisarPermanencia(Suscriptor sub) {
-		return (directorioPermanente.indexOf(sub)==-1)? false: true;
+	protected boolean revisarPermanencia(Contrato con) {
+		boolean verdad = (directorioPermanente.indexOf(con) == -1)? false: true;
+		if(!verdad) directorioPermanente.add(con);
+		return verdad;
 	}
 	
-	public String quitarSub(Suscriptor sub) {
-		boolean valor = quitarSubAux(sub);
-		String mensaje = "";
+	public boolean eliminarSuscriptor(Contrato con) {
+		boolean valor = quitarSub(con);
+		String mensaje;
 		if(valor){
-			mensaje += "Ya no cuenta con " + nombreSer + ". Vuelva pronto";
+			mensaje = "Ya no cuenta con " + nombreSer + ", " + con.obtenerCliente().obtenerNombre() + ". Vuelva pronto";
 		} else {
-			mensaje += "No contaba con " + nombreSer + " 7_7";
+			mensaje = "No contaba con " + nombreSer + " 7_7";
 		}
-		return mensaje;
+		System.out.println(mensaje);
+		return valor;
 	}
 	
-	protected boolean quitarSubAux(Suscriptor sub) {
-		int valor = directorioActual.indexOf(sub);
+	protected boolean quitarSub(Contrato con) {
+		int valor = directorioActual.indexOf(con);
 		if(valor==-1) return false;
 		directorioActual.remove(valor);
 		return true;
 	}
 	
-	public abstract String cobrar(Suscriptor sub);
-
-	protected abstract boolean sePuedeCobrar(Suscriptor sub);
+	public abstract void pago();
 	
-	public abstract String notificar();
+	public abstract void notificar();
 	
 	public void reiniciar() {
 		directorioActual.clear();
 		directorioPermanente.clear();
+	}
+	
+	public boolean equals(Object obj) {
+		if(!(obj instanceof ServicioGeneral)) return false;
+		ServicioGeneral ser = (ServicioGeneral)obj;
+		return (nombreSer.equals(ser.nombreSer));
 	}
 }

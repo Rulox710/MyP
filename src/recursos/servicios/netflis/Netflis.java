@@ -1,19 +1,20 @@
-package recursos.servicios.hammazon;
+package recursos.servicios.netflis;
 
 import recursos.interfaces.Servicio;
 import recursos.interfaces.Suscriptor;
 import recursos.servicios.ServicioGeneral;
+import recursos.servicios.netflis.cobro.*;
 
-public class HammazonPremium extends ServicioGeneral{
+public class NetflisDos extends ServicioGeneral{
 	
-	private final double costo = 13;
+	private final double costo = 10;
 	
-	public HammazonPremium() {
-		super("HammazonNormal");
+	public NetflisDos() {
+		super("NetflisDos");
 	}
 	
 	public String cobrar(Suscriptor sub) {
-		if(sePuedeCobrar(sub)){
+		if(sePuedeCobrar(sub)) {
 			sub.asignarDinero(sub.obtenerDinero() - costo);
 		} else {
 			return quitarSub(sub);
