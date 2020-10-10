@@ -26,6 +26,7 @@ public class Persona implements Suscriptor{
 		return ser.agregarSuscriptor(con);
 	}
 	
+	@Override
 	public boolean cambiarSuscripcion(Servicio ser, int i) {
 		Contrato con = new Contrato (ser, this);
 		int j = servicios.indexOf(con);
@@ -52,14 +53,17 @@ public class Persona implements Suscriptor{
 		return notificaciones;
 	}
 	
+	@Override
 	public String obtenerNombre() {
 		return nombre;
 	}
 
+	@Override
 	public double obtenerDinero() {
 		return dinero;
 	}
 	
+	@Override
 	public void asignarDinero(double dinero) {
 		this.dinero = dinero;
 	}
