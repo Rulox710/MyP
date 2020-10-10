@@ -3,7 +3,6 @@ package recursos.suscriptores;
 import recursos.Contrato;
 import recursos.interfaces.Suscriptor;
 import recursos.interfaces.Servicio;
-import recursos.servicios.MetodoPago;
 
 import java.util.ArrayList;
 
@@ -21,10 +20,18 @@ public class Persona implements Suscriptor{
 	}
 	
 	@Override
-	public boolean iniciarSuscripcion(Servicio ser, MetodoPago mp){
-		Contrato con = new Contrato(ser, this, mp);
+	public boolean iniciarSuscripcion(Servicio ser, int i) {
+		Contrato con = new Contrato(ser, this, i);
 		servicios.add(con);
 		return ser.agregarSuscriptor(con);
+	}
+	
+	public boolean cambiarSuscripcion(Servicio ser, int i) {
+		Contrato con = new Contrato (ser, this);
+		int j = servicios.indexOf(con);
+		if(j == -1 || servicios.get(j).obtenerTipo() == i) return false;
+		servicios.get(j).asignarTipo(i);
+		return ser.cambiarSuscriptor(con, i);
 	}
 	
 	@Override

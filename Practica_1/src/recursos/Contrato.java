@@ -2,20 +2,19 @@ package recursos;
 
 import recursos.interfaces.Suscriptor;
 import recursos.interfaces.Servicio;
-import recursos.servicios.MetodoPago;
 
 public class Contrato {
 	
 	private Suscriptor cliente;
 	private Servicio ser;
-	private MetodoPago tipo;
+	private int tipo;
 	
 	public Contrato(Servicio ser, Suscriptor cliente) {
 		this.ser = ser;
 		this.cliente = cliente;
 	}
 	
-	public Contrato(Servicio ser, Suscriptor cliente, MetodoPago tipo) {
+	public Contrato(Servicio ser, Suscriptor cliente, int tipo) {
 		this.ser = ser;
 		this.cliente = cliente;
 		this.tipo = tipo;
@@ -29,11 +28,11 @@ public class Contrato {
 		return cliente;
 	}
 	
-	public MetodoPago obtenerTipo() {
+	public int obtenerTipo() {
 		return tipo;
 	}
 	
-	public void asignarTipo(MetodoPago tipo) {
+	public void asignarTipo(int tipo) {
 		this.tipo = tipo;
 	}
 	

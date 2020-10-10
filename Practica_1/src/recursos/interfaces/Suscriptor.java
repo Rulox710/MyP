@@ -1,10 +1,10 @@
 package recursos.interfaces;
 
-import recursos.servicios.MetodoPago;
-
 public interface Suscriptor {
 
-	public abstract boolean iniciarSuscripcion(Servicio ser, MetodoPago mp);
+	public abstract boolean iniciarSuscripcion(Servicio ser, int i);
+	
+	public abstract boolean cambiarSuscripcion(Servicio ser, int i);
 	
 	public abstract boolean terminarSuscripcion(Servicio ser);
 	

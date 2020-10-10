@@ -13,27 +13,8 @@ public abstract class ServicioGeneral implements Servicio {
 	protected ArrayList<Contrato> directorioPermanente;
 	protected ArrayList<Contrato> directorioActual;
 	
-	public boolean agregarSuscriptor(Contrato con) {
-		String mensaje;
-		boolean valor = false;
-		Suscriptor s = con.obtenerCliente();
-		if(con.obtenerTipo().sePuedeCobrar(con)){
-			if(agregarNuevo(con)){
-				valor = true;
-				if(revisarPermanencia(con)){
-					mensaje = "Bienvenido de vuelta, " + s.obtenerNombre() + ", a " + nombreSer;
-				} else {
-					mensaje = "Bienvenido a " + nombreSer + ", " + s.obtenerNombre();
-				}
-			} else {
-				mensaje = "Ya cuenta con el servicio de " + nombreSer;
-			}
-		} else {
-			mensaje = "No cuenta con el fondo necesario para contratar el servicio unu";
-		}
-		System.out.println(mensaje);
-		return valor;
-	}
+	@Override
+	public abstract boolean agregarSuscriptor(Contrato con);
 	
 	protected boolean agregarNuevo(Contrato con) {
 		if(directorioActual.indexOf(con) != -1) return false;
@@ -47,11 +28,20 @@ public abstract class ServicioGeneral implements Servicio {
 		return verdad;
 	}
 	
+	@Override 
+	public boolean cambiarSuscriptor(Contrato con, int i) {
+		directorioActual.get(directorioActual.indexOf(con)).asignarTipo(i);
+		
+		return true;
+	}
+	
+	@Override
 	public boolean eliminarSuscriptor(Contrato con) {
 		boolean valor = quitarSub(con);
 		String mensaje;
 		if(valor){
-			mensaje = "Ya no cuenta con " + nombreSer + ", " + con.obtenerCliente().obtenerNombre() + ". Vuelva pronto";
+			mensaje = "Ya no cuenta con " + nombreSer + ", " +
+				con.obtenerCliente().obtenerNombre() + ". Vuelva pronto";
 		} else {
 			mensaje = "No contaba con " + nombreSer + " 7_7";
 		}
@@ -66,8 +56,10 @@ public abstract class ServicioGeneral implements Servicio {
 		return true;
 	}
 	
+	@Override
 	public abstract void pago();
 	
+	@Override
 	public abstract void notificar();
 	
 	public void reiniciar() {
@@ -75,6 +67,7 @@ public abstract class ServicioGeneral implements Servicio {
 		directorioPermanente.clear();
 	}
 	
+	@Override
 	public boolean equals(Object obj) {
 		if(!(obj instanceof ServicioGeneral)) return false;
 		ServicioGeneral ser = (ServicioGeneral)obj;

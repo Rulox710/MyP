@@ -5,19 +5,21 @@ import recursos.interfaces.Suscriptor;
 import recursos.interfaces.Servicio;
 import recursos.suscriptores.Persona;
 import recursos.servicios.hammazon.Hammazon;
-import recursos.servicios.hammazon.cobro.HammazonPremium;
-import recursos.servicios.hammazon.cobro.HammazonNormal;
-import recursos.servicios.MetodoPago;
+import recursos.servicios.yutube.YuTube;
+import recursos.servicios.spootify.Spootify;
+import recursos.servicios.twitsh.Twitsh;
+import recursos.servicios.netflis.Netflis;
 
 import java.util.ArrayList;
  
 public class Main{
 	
 	public static Servicio hammazon = new Hammazon();
-	
-	public static MetodoPago hn = new HammazonNormal();
-	public static MetodoPago hp = new HammazonPremium();
-	
+	public static Servicio yutube = new YuTube();
+	public static Servicio spootify = new Spootify();
+	public static Servicio netflis = new Netflis();
+	public static Servicio twitsh = new Twitsh();
+		
 	public static void main(String[] args){
 		
 		String tecleado;
@@ -63,7 +65,7 @@ public class Main{
 	public static void porDefecto(){
 		ArrayList<Suscriptor> personas = new ArrayList<Suscriptor>();
 		personas.add(new Persona("Alicia", 500));
-		personas.add(new Persona("Bob", 10));//70
+		personas.add(new Persona("Bob", 32));//70
 		/*personas.add(new Persona("Cesar", 40));
 		personas.add(new Persona("Diego", 200));
 		personas.add(new Persona("Erika", 220));*/
@@ -71,8 +73,11 @@ public class Main{
 		int dias = 5;
 		int i = 0;
 		
-		personas.get(0).iniciarSuscripcion(hammazon, hp);
-		personas.get(1).iniciarSuscripcion(hammazon, hn);/*
+		personas.get(0).iniciarSuscripcion(hammazon, 1);
+		personas.get(0).iniciarSuscripcion(netflis, 2);
+		personas.get(0).iniciarSuscripcion(netflis, 1);
+		personas.get(0).iniciarSuscripcion(twitsh, 1);
+		personas.get(1).iniciarSuscripcion(yutube, 1);/*
 		System.out.println(personas.get(0).iniciarSuscripcion(tp));
 		System.out.println(personas.get(0).iniciarSuscripcion(ytp));
 		System.out.println(personas.get(0).iniciarSuscripcion(nt));
@@ -80,6 +85,9 @@ public class Main{
 		
 		while(i++ < 5){
 			hammazon.pago();
+			yutube.pago();
+			spootify.pago();
+			if(i==2) personas.get(1).iniciarSuscripcion(spootify, 1);
 			if(i==4) personas.get(0).terminarSuscripcion(hammazon);
 			System.out.println(personas.get(0).obtenerDinero());
 			System.out.println(personas.get(1).obtenerDinero());

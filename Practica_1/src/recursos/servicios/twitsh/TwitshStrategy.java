@@ -1,8 +1,8 @@
-package recursos.servicios;
+package recursos.servicios.twitsh;
 
 import recursos.Contrato;
 
-public interface MetodoPago {
+public interface TwitshStrategy {
 	
 	public abstract void cobrar(Contrato con);
 
