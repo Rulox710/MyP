@@ -38,7 +38,7 @@ public class Twitsh extends ServicioGeneral {
 		boolean valor = false;
 		Suscriptor s = con.obtenerCliente();
 		TwitshStrategy est = determinarEstrategia(con);
-		if(revisarPermanencia(con)) con.noEsPrimer();
+		if(rePerAux(con)) con.noEsPrimer();
 
 		if(est.sePuedeCobrar(con)){
 			if(agregarNuevo(con)){

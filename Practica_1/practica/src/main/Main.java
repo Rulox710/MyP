@@ -27,10 +27,11 @@ public class Main{
 		boolean ciclo = true;
 		int opcion = 0;
 		
-		System.out.println("Bienevenido a la simulacion de la practica 1");
-		System.out.println("Selecctione una de las opciones:");
+		System.out.println("Bienvenido a la simulacion de la practica 1");
+		
 		
 		do {
+		System.out.println("Seleccione una de las opciones:\n");
 		System.out.println("1. Simulacion guiada(la indicada en la practica)");
 		System.out.println("2. Simacion en tiempo real");
 		System.out.println("3. Terminar el programa");
@@ -64,29 +65,46 @@ public class Main{
 	}
 	
 	public static void porDefecto(){
-		ArrayList<Suscriptor> personas = new ArrayList<Suscriptor>();
-		personas.add(new Persona("Alicia", 500));
-		personas.add(new Persona("Bob", 70));
-		personas.add(new Persona("Cesar", 40));
-		personas.add(new Persona("Diego", 200));
-		personas.add(new Persona("Erika", 220));
+		ArrayList<Suscriptor> personas = crearPersonas();
 		
-		int dias = 5;
 		int i = 0;
-		
-		personas.get(0).iniciarSuscripcion(hammazon, 1);
-		personas.get(0).iniciarSuscripcion(netflis, 2);
-		personas.get(0).iniciarSuscripcion(netflis, 1);
-		personas.get(0).iniciarSuscripcion(yutube, 1);
-		personas.get(0).iniciarSuscripcion(twitsh, 1);
-		personas.get(0).iniciarSuscripcion(spootify, 1);
-		
-		while(i++ < 5){
-			if(i==3){
-				personas.get(0).terminarSuscripcion(hammazon);
-			}
-			if(i==4){
-				personas.get(0).iniciarSuscripcion(hammazon,0);
+		while(i < 5) {
+			if(i==0) {
+				personas.get(0).iniciarSuscripcion(hammazon, 1);
+				personas.get(0).iniciarSuscripcion(netflis, 2);
+				personas.get(0).iniciarSuscripcion(yutube, 1);
+				personas.get(0).iniciarSuscripcion(twitsh, 1);
+				personas.get(0).iniciarSuscripcion(spootify, 1);
+			
+				personas.get(1).iniciarSuscripcion(hammazon, 1);
+				personas.get(1).iniciarSuscripcion(netflis, 2);
+				personas.get(1).iniciarSuscripcion(yutube, 1);
+				personas.get(1).iniciarSuscripcion(twitsh, 1);
+				personas.get(1).iniciarSuscripcion(spootify, 1);
+				
+				personas.get(2).iniciarSuscripcion(yutube, 0);
+				personas.get(2).iniciarSuscripcion(spootify, 1);
+			
+				personas.get(3).iniciarSuscripcion(netflis, 1);
+				personas.get(3).iniciarSuscripcion(hammazon, 1);
+			
+				personas.get(4).iniciarSuscripcion(netflis, 2);
+				personas.get(4).iniciarSuscripcion(twitsh, 0);
+				personas.get(4).iniciarSuscripcion(yutube, 0);
+				personas.get(4).iniciarSuscripcion(spootify, 0);
+			} if(i==1) {
+				personas.get(3).iniciarSuscripcion(twitsh, 0);
+				personas.get(4).cambiarSuscripcion(yutube, 1);
+				personas.get(4).cambiarSuscripcion(spootify, 1);
+			} if(i==2) {
+				personas.get(3).iniciarSuscripcion(spootify, 0);
+				personas.get(3).terminarSuscripcion(netflis);
+			
+				personas.get(4).terminarSuscripcion(netflis);
+				personas.get(4).iniciarSuscripcion(hammazon, 1);
+				personas.get(4).cambiarSuscripcion(twitsh, 1);
+			} if(i==3) {
+				personas.get(3).iniciarSuscripcion(netflis, 2);
 			}
 			
 			hammazon.pago();
@@ -104,26 +122,45 @@ public class Main{
 			twitsh.pago();
 			twitsh.notificar();
 			
-			System.out.println(personas.get(0).verNotificaciones());
-
-			System.out.println(personas.get(0).obtenerDinero());
+			System.out.println(personas.get(0).obtenerNombre() + ", dia: " + (i+1));
+			System.out.println(verNotificaciones(personas.get(0))+ "");
 			
+			System.out.println(personas.get(1).obtenerNombre() + ", dia: " + (i+1));
+			System.out.println(verNotificaciones(personas.get(1))+ "");
+			
+			System.out.println(personas.get(2).obtenerNombre() + ", dia: " + (i+1));
+			System.out.println(verNotificaciones(personas.get(2))+ "");
+			
+			System.out.println(personas.get(3).obtenerNombre() + ", dia: " + (i+1));
+			System.out.println(verNotificaciones(personas.get(3))+ "");
+			
+			System.out.println(personas.get(4).obtenerNombre() + ", dia: " + (i+1));
+			System.out.println(verNotificaciones(personas.get(4))+ "");
+			i++;
 		}
 		
-		System.out.println();
 	}
 	
 	public static void ejecutar(){
 		
 	}
 	
-/*
-Bob, creyendo que puede pagar todos los servicios, contrata la versión más cara disponible, sin embargo inicia con $70.
-
-César inicia con $40 y él contrata Spootify Premium y se suscribe a Yutube en su versión gratuita.
-
-Diego se suscribe a Netflis para dos dispositivos y Hammazon Prime video en su versión premium. En el segundo día, se suscribe a Twitsh en su versión normal. Para el tercer día se suscribe a Spootify gratis y cancela su suscripción a Netflis. Para el cuarto día se suscribe nuevamente a Netflis para 4 dispositivos. Él inicia con $200.
-
-Erika se suscribe a Netflis para 4 dispositivos, Twitsh en su versión normal y, Spootify y YuTube gratis. Para el segundo día cambia su suscripción a Spootify premium y Yutube premium. El tercer día cancela la suscripción de Netflis y contrata Hammazon Prime video premium y cambia su suscripción de Twitsh a su versión premium. Ella inicia con $220.
-*/
+	public static ArrayList<Suscriptor> crearPersonas() {
+		ArrayList<Suscriptor> personas = new ArrayList<Suscriptor>();
+		personas.add(new Persona("Alicia", 500));
+		personas.add(new Persona("Bob", 70));
+		personas.add(new Persona("Cesar", 40));
+		personas.add(new Persona("Diego", 200));
+		personas.add(new Persona("Erika", 220));
+		return personas;
+	}
+	
+	public static String verNotificaciones(Suscriptor sub) {
+		String cad = "";
+		ArrayList<String> str = new ArrayList<String>(sub.verNotificaciones());
+		for(String not: str) {
+			cad += not + "\n";
+		}
+		return cad;
+	}
 }

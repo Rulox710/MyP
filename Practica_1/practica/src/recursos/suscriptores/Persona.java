@@ -7,7 +7,7 @@ import recursos.interfaces.Servicio;
 import java.util.ArrayList;
 
 /**
- * Clase que implementa Suscriptor
+ * Clase que implementa <code>Suscriptor</code>
  * @author Raul Nunio
  * @version 1.1
  */
@@ -19,8 +19,9 @@ public class Persona implements Suscriptor{
 	
 	/**
 	 * Constructor de la clase
-	 * @param nombre Un String con el nombre de la Persona
-	 * @param dinero Los fondos de la Persona 
+	 * @param nombre Un <code>String</code> con el <code>nombre</code> de la 
+	 * <code>Persona</code>
+	 * @param dinero Los fondos de la <code>Persona</code>
 	 */
 	public Persona(String nombre, double dinero) {
 		this.nombre = nombre;
@@ -30,23 +31,27 @@ public class Persona implements Suscriptor{
 	}
 	
 	/**
-	 * Metodo que comienza la suscripcionde la Persona con un Servicio
-	 * @param ser El servicio a contratar
-	 * @param i Un valor que representa el tipo de suscripcion
-	 * @return true si se inicio, false si no
+	 * Metodo que comienza la suscripcionde la <code>Persona</code> con un 
+	 * <code>Servicio</code>
+	 * @param ser El <code>Servicio</code> a contratar
+	 * @param i Un valor que representa el <code>tipo</code> de suscripcion
+	 * @return <code>true</code> si se inicio, <code>false</code> si no
 	 */
 	@Override
 	public boolean iniciarSuscripcion(Servicio ser, int i) {
 		Contrato con = new Contrato(ser, this, i);
-		servicios.add(con);
+		Contrato cons = new Contrato(ser, this);
+		servicios.add(cons);
 		return ser.agregarSuscriptor(con);
 	}
 	
 	/**
-	 * Metodo para cambiar el tipo de suscripcion de la Persona
-	 * @param ser El SErvicio de que se cambiara el tipo de suscripcion
-	 * @param i Un valor que representa el tipo de suscripcion
-	 * @return true si se ha cambiado, false si no
+	 * Metodo para cambiar el <code>tipo</code> de suscripcion de la 
+	 * <code>Persona</code>
+	 * @param ser El <code>Servicio</code> de que se cambiara el 
+	 * <code>tipo</code> de suscripcion
+	 * @param i Un valor que representa el <code>tipo</code> de suscripcion
+	 * @return <code>true</code> si se ha cambiado, <code>false</code> si no
 	 */
 	@Override
 	public boolean cambiarSuscripcion(Servicio ser, int i) {
@@ -58,22 +63,23 @@ public class Persona implements Suscriptor{
 	}
 	
 	/**
-	 * Metodo para terminar la suscripcion de la Persona con algun Servicio
-	 * @param ser El servicio a terminar
-	 * @return true si se ha terminado, false si no 
+	 * Metodo para terminar la suscripcion de la <code>Persona</code> con algun 
+	 * <code>Servicio</code>
+	 * @param ser El <code>Servicio</code> a terminar
+	 * @return <code>true</code> si se ha terminado, <code>false</code> si no 
 	 */
 	@Override
 	public boolean terminarSuscripcion(Servicio ser) {
 		Contrato con = new Contrato (ser, this);
-		notificaciones.clear();
 		boolean m = ser.eliminarSuscriptor(con);
-		servicios.remove(servicios.indexOf(con));
+		if(m == true)servicios.remove(servicios.indexOf(con));
 		return m;
 	}
 	
 	/**
-	 * Metodo para recibir las notificaciones de los Servicios contratados
-	 * @param str Un <code>String<\code> con informacion de algun Servicio
+	 * Metodo para recibir las <code>notificaciones</code> de los servicios contratados
+	 * @param str Un <code>String</code> con informacion de algun 
+	 * <code>Servicio</code>
 	 */
 	@Override
 	public void recibirNotificaciones(String str){
@@ -81,9 +87,10 @@ public class Persona implements Suscriptor{
 	}
 	
 	/**
-	 * Metodo para obtener el ArrayList con las notificaciones de los Servicios 
-	 * que contrato la Persona
-	 * @return Un ArrayList con String
+	 * Metodo para obtener el <code>ArrayList</code> con las 
+	 * <code>notificaciones</code> de los servicios que contrato la 
+	 * <code>Persona</code>
+	 * @return Un <code>ArrayList</code> con <code>String</code>
 	 */
 	public ArrayList<String> verNotificaciones() {
 		ArrayList<String> str = new ArrayList<String>(notificaciones);
@@ -92,8 +99,8 @@ public class Persona implements Suscriptor{
 	}
 	
 	/**
-	 * Metodo para obtener el nombre de la Persona
-	 * @return El nombre de la Persona 
+	 * Metodo para obtener el <code>nombre</code> de la <code>Persona</code>
+	 * @return El <code>nombre</code> de la <code>Persona</code>
 	 */
 	@Override
 	public String obtenerNombre() {
@@ -101,8 +108,8 @@ public class Persona implements Suscriptor{
 	}
 
 	/**
-	 * Metodo para obtener los fondos de la Persona 
-	 * @return Los fondos de la persona
+	 * Metodo para obtener los fondos de la <code>Persona</code>
+	 * @return Los fondos de la <code>Persona</code>
 	 */
 	@Override
 	public double obtenerDinero() {
@@ -110,8 +117,8 @@ public class Persona implements Suscriptor{
 	}
 	
 	/**
-	 * Metodo para asignar los fondos de la Persona
-	 * @param El nuevo fondo de la persona
+	 * Metodo para asignar los fondos de la <code>Persona</code>
+	 * @param dinero El nuevo fondo de la <code>Persona</code>
 	 */
 	@Override
 	public void asignarDinero(double dinero) {
@@ -121,7 +128,8 @@ public class Persona implements Suscriptor{
 	/**
 	 * Metodo que compara una <code>Persona</code> con un <code>Objeto</code>
 	 * @param obj Un <code>Objeto</code>
-	 * @return true si son iguales en cuanto nombre, false si no  
+	 * @return <code>true</code> si son iguales en cuanto <code>nombre</code>, 
+	 * <code>false</code> si no  
 	 */
 	@Override
 	public boolean equals(Object obj) {

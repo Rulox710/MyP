@@ -10,22 +10,25 @@ import recursos.Contrato;
 public interface HammazonStrategy {
 	
 	/**
-	 * Metodo para cobrar a un Suscriptor por medio de su Contrato
-	 * @param con El Contrato del Suscriptor
+	 * Metodo para cobrar a un <code>Suscriptor</code> por medio de su 
+	 * <code>Contrato</code>
+	 * @param con El <code>Contrato</code> del <code>Suscriptor</code>
 	 */ 
 	public abstract void cobrar(Contrato con);
 
 	/**
-	 * Metodo para verificar que el Suscriptor pueda pagar el Servicio por medio
-	 * de su Contrato
-	 * @param con El Contrato del Suscriptor
-	 * @return true si puede pagar, false si no
+	 * Metodo para verificar que el <code>Suscriptor</code> pueda pagar el 
+	 * <code>Servicio</code> por medio de su <code>Contrato</code>
+	 * @param con El <code>Contrato</code> del <code>Suscriptor</code>
+	 * @return <code>true</code> si puede pagar, <code>false</code> si no
 	 */ 
 	public abstract boolean sePuedeCobrar(Contrato con);
 	
 	/**
 	 * Metodo para notificar a todos los suscriptores sobre las actividades de 
-	 * Hammazon
+	 * <code>Hammazon</code>
+	 * @return El arreglo con los <code>String</code> de las notificaciones de 
+	 * <code>Hammazon</code>
 	 */
 	public abstract String[] obtenerNotificaciones();
 }

@@ -31,11 +31,15 @@ public class Premium implements SpootifyStrategy {
 	 */
 	@Override
 	public void cobrar(Contrato con) {
+		Suscriptor s = con.obtenerCliente();
 		if(con.obtenerPrimer()){
 			con.noEsPrimer();
+			s.recibirNotificaciones(s.obtenerNombre() + ", es su primer dia" +
+			" en Spootify Premium, no se cobrara");
 			return;
 		}
-		Suscriptor s = con.obtenerCliente();
+		s.recibirNotificaciones(s.obtenerNombre() + ", se cobraran " + costo + 
+		" pesos por Spootify Premium");
 		s.asignarDinero(s.obtenerDinero() - costo);
 	}
 	

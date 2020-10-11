@@ -9,15 +9,16 @@ import recursos.servicios.yutube.cobro.Premium;
 import java.util.ArrayList;
 
 /**
- * Esta clase modela el comportamiento que tendra el servicio YuTube
+ * Esta clase modela el comportamiento que tendra el <code>Servicio</code> de
+ * <code>YuTube</code>
  * @author Raul Nunio
  * @version 1.2
  */
 public class YuTube extends ServicioGeneral {
 	
 	/**
-     * Constructor para la clase. Sus ArrayList inician vacios y su nombre será 
-     * YuTube
+     * Constructor para la clase. Sus <code>ArrayList</code> inician vacios y 
+     * su nombre será <code>YuTube</code>
      */
 	public YuTube() {
 		nombreSer = "YuTube";
@@ -26,11 +27,14 @@ public class YuTube extends ServicioGeneral {
 	}
 	
 	/**
-	 * Metodo para agregar a un Contrato a los ArrayList de para bindar el 
-	 * servicio a un Suscriptor. Si el Suscriptor ya tenia el servicio, no se 
-	 * permite. Si el suscriptor no puede pagar la suscripcion, no se permite
-	 * @param con El Contrato
-	 * @return true si se permite la suscripcion, false si no
+	 * Metodo para agregar a un <code>Contrato</code> a los 
+	 * <code>ArrayList</code> de para bindar el <code>Servicio</code> a un 
+	 * <code>Suscriptor</code>. Si el <code>Suscriptor</code> ya tenia el 
+	 * <code>Servicio</code>, no se permite. Si el <code>Suscriptor</code> no 
+	 * puede pagar la suscripcion, no se permite
+	 * @param con El <code>Contrato</code>
+	 * @return <code>true</code> si se permite la suscripcion, 
+	 * <code>false</code> si no
 	 */
 	@Override
 	public boolean agregarSuscriptor(Contrato con){
@@ -38,7 +42,7 @@ public class YuTube extends ServicioGeneral {
 		boolean valor = false;
 		Suscriptor s = con.obtenerCliente();
 		YuTubeStrategy est = determinarEstrategia(con);
-		if(revisarPermanencia(con)) con.noEsPrimer();
+		if(rePerAux(con)) con.noEsPrimer();
 		
 		if(est.sePuedeCobrar(con)){
 			if(agregarNuevo(con)){
@@ -62,9 +66,9 @@ public class YuTube extends ServicioGeneral {
 	}
 	
 	/**
-	 * Metodo para cobrar a todos los Suscriptores que tengan el servicio.
-	 * Si no pueden pagar, el contrato cambia a una estrategia de pago acorde a
-	 * su presupuesto
+	 * Metodo para cobrar a todos los suscriptores que tengan el 
+	 * <code>Servicio</code>. Si no pueden pagar, el contrato cambia a una 
+	 * estrategia de pago acorde a su presupuesto
 	 */
 	@Override
 	public void pago() {
@@ -85,8 +89,8 @@ public class YuTube extends ServicioGeneral {
 	}
 
 	/**
-	 * Metodo para notificar a todos los Suscriptores de actividades del 
-	 * servicio
+	 * Metodo para notificar a todos los suscriptores de actividades del 
+	 * <code>Servicio</code>
 	 */
 	@Override
 	public void notificar() {
@@ -99,8 +103,9 @@ public class YuTube extends ServicioGeneral {
 	
 	/**
 	 * Metodo para determinar la estrategia que se usara con determinado 
-	 * Suscriptor
-	 * @param Contrato El contrato del Sscriptor con el Servicio
+	 * <code>Suscriptor</code>
+	 * @param con El <code>Contrato</code> del <code>Sucriptor</code> con el 
+	 * <code>Servicio</code>
 	 */
 	private YuTubeStrategy determinarEstrategia(Contrato con) {
 		if(con.obtenerTipo() == 0) return new Normal();

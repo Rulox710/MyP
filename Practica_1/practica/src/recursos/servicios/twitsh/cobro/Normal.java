@@ -29,11 +29,15 @@ public class Normal implements TwitshStrategy {
 	 */ 
 	@Override
 	public void cobrar(Contrato con) {
+		Suscriptor s = con.obtenerCliente();
 		if(con.obtenerPrimer()){
 			con.noEsPrimer();
+			s.recibirNotificaciones(s.obtenerNombre() + ", es su primer dia" +
+			" en Twitsh Normal, no se cobrara");
 			return;
 		}
-		Suscriptor s = con.obtenerCliente();
+		s.recibirNotificaciones(s.obtenerNombre() + ", se cobraran " + costo + 
+		" pesos por Twitsh Normal");
 		s.asignarDinero(s.obtenerDinero() - costo);
 	}
 	

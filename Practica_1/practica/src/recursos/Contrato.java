@@ -4,7 +4,8 @@ import recursos.interfaces.Suscriptor;
 import recursos.interfaces.Servicio;
 
 /**
- * Clase para intermediar entre un Suscriptor y un Servicio
+ * Clase para intermediar entre un <code>Suscriptor</code> y un 
+ * <code>Servicio</code>
  * @author Raul nunio
  * @version 1.1
  */
@@ -16,9 +17,10 @@ public class Contrato {
 	private boolean primer;
 	
 	/**
-	 * Contructor de la clase para obtener un Contrato sin tipo de Servicio
-	 * @param ser El servicio
-	 * @param cliente El Suscriptor
+	 * Contructor de la clase para obtener un <code>Contrato</code> sin 
+	 * <code>tipo</code> de <code>Servicio</code>
+	 * @param ser El <code>Servicio</code>
+	 * @param cliente El <code>Suscriptor</code>
 	 */
 	public Contrato(Servicio ser, Suscriptor cliente) {
 		this.ser = ser;
@@ -26,10 +28,11 @@ public class Contrato {
 	}
 	
 	/**
-	 * Contructor de la clase para obtener un Contrato con tipo de Servicio
-	 * @param ser El servicio
-	 * @param cliente El Suscriptor
-	 * @param tipo Un valor que representa el tipo de Servicio
+	 * Contructor de la clase para obtener un <code>Contrato</code> con <code>tipo</code> de <code>Servicio</code>
+	 * @param ser El <code>Servicio</code>
+	 * @param cliente El <code>Suscriptor</code>
+	 * @param tipo Un valor que representa el <code>tipo</code> de 
+	 * <code>Servicio</code>
 	 */
 	public Contrato(Servicio ser, Suscriptor cliente, int tipo) {
 		this.ser = ser;
@@ -39,24 +42,24 @@ public class Contrato {
 	}
 	
 	/**
-	 * Metodo para declarar que no es el primer dia del suscriptor en el 
-	 * Servicio
+	 * Metodo para declarar que no es el primer dia del <code>Suscriptor</code> 
+	 * en el <code>Servicio</code>
 	 */
 	public void noEsPrimer(){
 		primer = false;
 	}
 	
 	/**
-	 * Metodo para obtener el Servicio del Contrato
-	 * @return El Servicio del Contrato
+	 * Metodo para obtener el <code>Servicio</code> del <code>Contrato</code>
+	 * @return El <code>Servicio</code> del <code>Contrato</code>
 	 */
 	public Servicio obtenerServicio() {
 		return ser;
 	}
 	
 	/**
-	 * Metodo pata obtener el Cliente del Contrato
-	 * @return El Suscriptor del Contrato
+	 * Metodo pata obtener el <code>Cliente</code> del <code>Contrato</code>
+	 * @return El <code>Suscriptor</code> del Contrato
 	 */
 	public Suscriptor obtenerCliente() {
 		return cliente;
@@ -71,9 +74,10 @@ public class Contrato {
 	}
 	
 	/**
-	 * Metodo para obtener un valor que representa el tipo de Servicio que se 
-	 * contrato
-	 * @return Un valor que representa el tipo de Servicio contratado
+	 * Metodo para obtener un valor que representa el <code>tipo</code> de 
+	 * <code>Servicio</code> que se contrato
+	 * @return Un valor que representa el tipo de <code>Servicio</code> 
+	 * contratado
 	 */
 	public int obtenerTipo() {
 		return tipo;
@@ -82,17 +86,18 @@ public class Contrato {
 	/**
 	 * Metodo para asignar un valor que representa el tipo de Servicio que se 
 	 * contrato
-	 * @param Un valor que prepresenta un nuevo para el tipo de Servicio
+	 * @param tipo Un valor que prepresenta un nuevo para el tipo de Servicio
 	 */
 	public void asignarTipo(int tipo) {
 		this.tipo = tipo;
 	}
 	
 	/**
-	 * Metodo para decidir si un Objeto es igual a un Contrato de acuerdo a si 
-	 * tienen el mismo Suscriptor y el mismo Servicio
+	 * Metodo para decidir si un <code>Object</code> es igual a un 
+	 * <code>Contrato</code> de acuerdo a si tienen el mismo 
+	 * <code>Suscriptor</code> y el mismo <code>Servicio</code>
 	 * @param obj El objeto a comparar
-	 * @return true si son iguales, false si no 
+	 * @return <code>true</code> si son iguales, <code>false</code> si no 
 	 */
 	@Override
 	public boolean equals(Object obj){

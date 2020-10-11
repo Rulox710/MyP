@@ -1,9 +1,7 @@
 package recursos.servicios.hammazon.cobro;
 
 import recursos.Contrato;
-import recursos.interfaces.Servicio;
 import recursos.interfaces.Suscriptor;
-import recursos.servicios.ServicioGeneral;
 import recursos.servicios.hammazon.HammazonStrategy;
 
 import java.util.ArrayList;
@@ -33,11 +31,15 @@ public class Normal implements HammazonStrategy{
 	 */
 	@Override
 	public void cobrar(Contrato con) {
+		Suscriptor s = con.obtenerCliente();
 		if(con.obtenerPrimer()){
 			con.noEsPrimer();
+			s.recibirNotificaciones(s.obtenerNombre() + ", es su primer dia" +
+			" en Hammazon Normal, no se cobrara");
 			return;
 		}
-		Suscriptor s = con.obtenerCliente();
+		s.recibirNotificaciones(s.obtenerNombre() + ", se cobraran 7 pesos" + 
+		" por Hammazon Normal");
 		s.asignarDinero(s.obtenerDinero() - costo);
 	}
 	

@@ -28,11 +28,15 @@ public class Premium implements TwitshStrategy {
 	 * Implementa cobrar de TwitshStrategy
 	 */
 	public void cobrar(Contrato con) {
+		Suscriptor s = con.obtenerCliente();
 		if(con.obtenerPrimer()){
 			con.noEsPrimer();
+			s.recibirNotificaciones(s.obtenerNombre() + ", es su primer dia" +
+			" en Twitsh Premium, no se cobrara");
 			return;
 		}
-		Suscriptor s = con.obtenerCliente();
+		s.recibirNotificaciones(s.obtenerNombre() + ", se cobraran " + costo + 
+		" pesos por Twitsh Premium");
 		s.asignarDinero(s.obtenerDinero() - costo);
 	}
 	

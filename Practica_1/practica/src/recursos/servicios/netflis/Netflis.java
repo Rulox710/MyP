@@ -39,7 +39,7 @@ public class Netflis extends ServicioGeneral {
 		boolean valor = false;
 		Suscriptor s = con.obtenerCliente();
 		NetflisStrategy est = determinarEstrategia(con);
-		if(revisarPermanencia(con)) con.noEsPrimer();
+		if(rePerAux(con)) con.noEsPrimer();
 
 		if(est.sePuedeCobrar(con)){
 			if(agregarNuevo(con)){
