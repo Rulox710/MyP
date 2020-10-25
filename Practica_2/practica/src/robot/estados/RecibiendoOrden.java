@@ -24,6 +24,7 @@ public class RecibiendoOrden implements EstadoRobot {
 	
 	/**
 	 * Contructor que toma al <code>Robot</code>
+	 * @param robot Un <code>Robot</code>
 	 */
 	public RecibiendoOrden(Robot robot) {
 		this.robot = robot;

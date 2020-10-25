@@ -12,6 +12,9 @@ public abstract class Casa {
 	 */
 	protected double costo;
 	
+	/**
+	 * Nombre de la casa, de que materiales esta hecha y costo
+	 */
 	protected String nombre;
 	
 	/**
@@ -23,7 +26,7 @@ public abstract class Casa {
 	}
 	
 	/**
-	 * Inicia la contruccion de la <code>Casa<code>
+	 * Inicia la contruccion de la <code>Casa</code>
 	 */
 	public void construccion() {
 		System.out.println("Se empezara a construir la casa.");

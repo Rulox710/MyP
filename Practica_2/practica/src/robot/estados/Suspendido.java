@@ -20,6 +20,7 @@ public class Suspendido implements EstadoRobot {
 	
 	/**
 	 * Contructor que toma al <code>Robot</code>
+	 * @param robot Un <code>Robot</code>
 	 */
 	public Suspendido(Robot robot) {
 		this.robot = robot;

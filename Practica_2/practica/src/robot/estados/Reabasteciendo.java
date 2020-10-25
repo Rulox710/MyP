@@ -18,6 +18,7 @@ public class Reabasteciendo implements EstadoRobot {
 	
 	/**
 	 * Contructor que toma al <code>Robot</code>
+	 * @param robot Un <code>Robot</code>
 	 */
 	public Reabasteciendo(Robot robot) {
 		this.robot = robot;

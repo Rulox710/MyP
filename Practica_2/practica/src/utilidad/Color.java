@@ -3,8 +3,7 @@ package utilidad;
 /**
  * Enum con colores que pueden ser usados en la consola con ANSI
  * 
- * @see <a href="https://stackoverflow.com/questions/5762491/how-to-print-color-
- * in-console-using-system-out-println/45444716#45444716">stack overflow</a>
+ * @see <a href="https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println/45444716#45444716">stack overflow</a>
  */
 
 public enum Color {

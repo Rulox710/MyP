@@ -3,7 +3,7 @@ package robot;
 import casa.Casa;
 
 /**
- * Interfaz que modela los posibles estados de <code>Robot<\code>
+ * Interfaz que modela los posibles estados del Robot
  */
 public interface EstadoRobot {
 	

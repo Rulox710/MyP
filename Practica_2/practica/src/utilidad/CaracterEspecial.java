@@ -3,14 +3,15 @@ package utilidad;
 /**
  * Clase con caracteres espaciales que pueden ser usados en la consola con ANSI
  * 
- * @see <a href="https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIes
- * capecodes.html"> Haoyi s Programming Blog</a>
+ * @see <a href="https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html">Haoyi s Programming Blog</a>
  */
 
 public class CaracterEspecial {
 	
 	/**
 	 * Mueve el cursor n espacios hacia arriba, y lo ubica al inicio de linea
+	 * @param n Un entero
+	 * @return Una cadena en ANSI
 	 */
 	public static String arribaN(int n) {
 		return "\u001b["+ n +"A";

@@ -18,6 +18,7 @@ public class Trabajando implements EstadoRobot {
 	
 	/**
 	 * Contructor que toma al <code>Robot</code>
+	 * @param robot Un <code>Robot</code>
 	 */
 	public Trabajando(Robot robot) {
 		this.robot = robot;

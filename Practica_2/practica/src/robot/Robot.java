@@ -46,7 +46,7 @@ public class Robot {
 	
 	/**
 	 * Metodo para cambiar el estado del robot
-	 * @param 
+	 * @param er Nuevo estado para el <code>Robot</code>
 	 */
 	public void cambiarEstado(EstadoRobot er){
 		estado = er;
@@ -60,14 +60,19 @@ public class Robot {
 		return estado.obtenerEstado();
 	}
 	
+	/**
+	 * Metodo para enumerar las posibles acciones del <code>Robot</code> en sus 
+	 * diferentes estados
+	 */
 	public void opcionesRobot() {
 		boolean ciclo = true;
 		do {
 			EstadoRobot er = estado;
 			System.out.println("Ahora estoy " + er.obtenerEstado());
 			System.out.println("\u00BFQue deberia hacer?");
-			System.out.println("1. Suspenderme\n2. Activarme\n3. Tomo una orden\n" +
-			"4. Trabajo\n5. Reabastecerme\n6. Ver las casas listas\n7. Terminar todo");
+			System.out.println("1. Suspenderme\n2. Activarme\n3. Tomo una ord" +
+			"en\n4. Trabajo\n5. Reabastecerme\n6. Ver las casas listas\n7. Te" +
+			"rminar todo");
 		
 			String str = Escritor.leerCadena();
 			System.out.println(CaracterEspecial.arribaN(9) + 
@@ -117,7 +122,7 @@ public class Robot {
 	
 	/**
 	 * Metodo para cambiar si tiene material para trabajar o no
-	 * @param casa Una <Casa>
+	 * @param material Un boleano
 	 */
 	public void asignarMaterial(boolean material) {
 		this.material = material;
@@ -134,7 +139,7 @@ public class Robot {
 	/**
 	 * Metodo para guardar las especificaciones de la <code>Casa</code> en la 
 	 * que se trabaja
-	 * @param casa Una <Casa>
+	 * @param casa Una <code>Casa</code>
 	 */
 	public void asignarCasa(Casa casa) {
 		this.casa = casa;
