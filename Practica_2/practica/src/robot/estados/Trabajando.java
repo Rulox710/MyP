@@ -1,6 +1,6 @@
 package robot.estados;
 
-import escritura.Escritor;
+import utilidad.Escritor;
 import robot.Robot;
 import robot.EstadoRobot;
 import casa.Casa;
@@ -28,7 +28,8 @@ public class Trabajando implements EstadoRobot {
 	 * <code>Suspendido</code>. No hace nada en este estado
 	 */
 	public void suspender() {
-		System.out.println("Estoy trabajando");
+		System.out.println("Estoy en el terreno a trabajar, no puede suspende" +
+			"rme\n");
 	}
 	
 	/**
@@ -36,7 +37,8 @@ public class Trabajando implements EstadoRobot {
 	 * <code>Activado</code>. No hace nada en este estado
 	 */
 	public void activar() {
-		System.out.println("Ya estoy activado");
+		System.out.println("Ya estoy activado, no hay necesidad de volverme" +
+			" a activar\n");
 	}
 	
 	/**
@@ -44,7 +46,7 @@ public class Trabajando implements EstadoRobot {
 	 * estado <code>RecibiendoOrden</code>. No hace nada en este estado
 	 */
 	public void tomarOrden() {
-		System.out.println("Ya he tomado una orden");
+		System.out.println("Ya he tomado una orden\n");
 	}
 	
 	/**
@@ -64,7 +66,7 @@ public class Trabajando implements EstadoRobot {
 	 * una <code>Casa</code>. No hace nada en este estado
 	 */
 	public void reabastecer() {
-		System.out.println("No tengo necesidad de reabastecer.");
+		System.out.println("No tengo necesidad de reabastecerme\n");
 	}
 	
 	/**

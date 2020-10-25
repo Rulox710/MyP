@@ -1,6 +1,8 @@
 package robot.estados;
 
-import escritura.Escritor;
+import utilidad.Escritor;
+import utilidad.Color;
+import utilidad.CaracterEspecial;
 import robot.Robot;
 import robot.EstadoRobot;
 import casa.Casa;
@@ -28,7 +30,7 @@ public class Suspendido implements EstadoRobot {
 	 * <code>Suspendido</code>
 	 */
 	public void suspender() {
-		System.out.println("No puedo hacer eso. Ya estoy suspendido... 7_7");
+		System.out.println("No puedo hacer eso. Ya estoy suspendido...\n");
 	}
 	
 	/**
@@ -37,10 +39,11 @@ public class Suspendido implements EstadoRobot {
 	 */
 	public void activar() {
 		if(robot.obtenerCasa() == null) {
-			System.out.println("Voy a activare");
+			System.out.println("Voy a activare\n");
 			robot.cambiarEstado(new RecibiendoOrden(robot));
 		} else {
-			System.out.println("Ya tengo una orden en progreso. Ire a hacerla");
+			System.out.println("Ya tengo una orden en progreso. " +
+				"Ire a hacerla\n");
 			robot.cambiarEstado(new Caminando(robot));
 		}
 		
@@ -57,24 +60,27 @@ public class Suspendido implements EstadoRobot {
 			boolean verdad = true;
 			while(verdad) {
 				String s = Escritor.leerCadena();
+				System.out.print(CaracterEspecial.arribaN(1) + 
+					CaracterEspecial.limpiaLin());
 				s = s.toUpperCase();
 				switch(s){
 					case "S":
-					System.out.println("Entonces me activare");
+					System.out.println("Entonces me activare\n");
 					robot.cambiarEstado(new RecibiendoOrden(robot));
 					verdad = false;
 					break;
 					case "N":
-					System.out.println("Entonces no me activare");
+					System.out.println("Entonces no me activare\n");
 					verdad = false;
 					break;
 					default:
+					
 					System.out.println("No es la respuesta que esperaba. " +
 					"\u00BFDeseas que me active?(S/N)");
 				}
 			}
 		} else {
-			System.out.println("Ya tengo una orden pendiente. Voy a hacerla");
+			System.out.println("Ya tengo una orden pendiente. Voy a hacerla\n");
 			robot.cambiarEstado(new Caminando(robot));
 		}
 		
@@ -87,9 +93,10 @@ public class Suspendido implements EstadoRobot {
 	public void trabajar() {
 		if(robot.obtenerCasa() == null){
 			System.out.println("No voy a trabajar sin una orden. Primero dee" +
-			"me una orden");	
+				"me una orden");
 		} else {
-			System.out.println("Tengo una orden pendiente. Ire a completarla");
+			System.out.println("Tengo una orden pendiente. Ire a completarl" +
+			"a\n");
 			robot.cambiarEstado(new Caminando (robot));
 		}
 		
@@ -100,7 +107,7 @@ public class Suspendido implements EstadoRobot {
 	 * una <code>Casa</code>. No hara nada en este estado
 	 */
 	public void reabastecer() {
-		System.out.println("No tengo necesidad de reabastecer.");
+		System.out.println("No tengo necesidad de reabastecer\n");
 	}
 	
 	/**

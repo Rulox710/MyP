@@ -1,7 +1,9 @@
 package robot;
 
 import java.util.ArrayList;
-import escritura.Escritor;
+import utilidad.Escritor;
+import utilidad.Color;
+import utilidad.CaracterEspecial;
 import robot.estados.Suspendido;
 import casa.Casa;
 
@@ -42,6 +44,10 @@ public class Robot {
 		casas = new ArrayList<Casa>();
 	}
 	
+	/**
+	 * Metodo para cambiar el estado del robot
+	 * @param 
+	 */
 	public void cambiarEstado(EstadoRobot er){
 		estado = er;
 	}
@@ -58,12 +64,15 @@ public class Robot {
 		boolean ciclo = true;
 		do {
 			EstadoRobot er = estado;
-			System.out.println("\nAhora estoy " + er.obtenerEstado());
+			System.out.println("Ahora estoy " + er.obtenerEstado());
 			System.out.println("\u00BFQue deberia hacer?");
 			System.out.println("1. Suspenderme\n2. Activarme\n3. Tomo una orden\n" +
-			"4. Trabajo\n5. Reabastecerme\n6. Terminar todo");
+			"4. Trabajo\n5. Reabastecerme\n6. Ver las casas listas\n7. Terminar todo");
 		
 			String str = Escritor.leerCadena();
+			System.out.println(CaracterEspecial.arribaN(9) + 
+				CaracterEspecial.limpiaLinSig());
+			
 			switch(str) {
 				case "1":
 				er.suspender();
@@ -81,11 +90,14 @@ public class Robot {
 				er.reabastecer();
 				break;
 				case "6":
+				System.out.println(casas + "\n");
+				break;
+				case "7":
 				if(er.obtenerEstado() == "Suspendido"){
-					System.out.println("Buenas noches ^^");
+					System.out.println("Buenas noches ^^\n");
 					ciclo = false;
 				} else {
-					System.out.println("Estoy en medio de algo, no me apague");
+					System.out.println("Estoy en medio de algo, no me apague\n");
 				}
 				break;
 				default:
@@ -93,10 +105,6 @@ public class Robot {
 				"e nuevo");
 			}	
 		} while(ciclo);
-	}
-	
-	public EstadoRobot obtenerEstado() {
-		return estado;
 	}
 	
 	/**
@@ -132,7 +140,4 @@ public class Robot {
 		this.casa = casa;
 	}
 	
-	public ArrayList<Casa> obtenerCasas() {
-		return casas;
-	}
 }

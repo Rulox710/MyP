@@ -1,6 +1,8 @@
 package robot.estados;
 
-import escritura.Escritor;
+import utilidad.Escritor;
+import utilidad.Color;
+import utilidad.CaracterEspecial;
 import robot.Robot;
 import robot.EstadoRobot;
 import casa.Casa;
@@ -41,34 +43,39 @@ public class Caminando implements EstadoRobot {
 	public void suspender() {
 		if(robot.obtenerCasa() ==  null) {
 			System.out.println("Trabajo listo. Camino para suspenderme en mi " +
-			"area de descanzo.");
+			"area de descanzo\n");
 			robot.cambiarEstado(new Suspendido(robot));
 		} else {
 			System.out.println("\u00BFSeguro que quieres suspenderme? Aun ten" +
 			"go trabajo que hacer(S/N)");
 			boolean verdad = true;
 			while(verdad) {
-				String s = Escritor.leerCadena();
-				s = s.toUpperCase();
+				String s = Escritor.leerCadena().toUpperCase();
+				System.out.print(CaracterEspecial.arribaN(1) + 
+					CaracterEspecial.limpiaLin());
 				switch(s){
 					case "S":
 					System.out.println("\u00BFGuardo su orden?(S/N)");
 					boolean v2 = true;
-					s = Escritor.leerCadena().toUpperCase();
 					while(v2){
+						s = Escritor.leerCadena().toUpperCase();
+						System.out.print(CaracterEspecial.arribaN(1) + 
+							CaracterEspecial.limpiaLin());
 						switch(s){
 							case "S":
 							System.out.println("Me suspendere y guardare la " +
-							"orden");
+							"orden\n");
 							v2 = false;
+							break;
 							case "N":
 							System.out.println("Me suspendere y no guardare l" +
-							"a orden");
+							"a orden\n");
 							robot.asignarMaterial(false);
 							robot.asignarCasa(null);
 							v2 = false;
+							break;
 							default:
-							System.out.println("No es la respuesta que espera" +
+							System.out.print("No es la respuesta que espera" +
 							"ba. \u00BFDeseas que guarde?(S/N)");
 						}
 					}
@@ -76,11 +83,11 @@ public class Caminando implements EstadoRobot {
 					verdad = false;
 					break;
 					case "N":
-					System.out.println("Entonces no me suspendere");
+					System.out.println("Entonces no me suspendere\n");
 					verdad = false;
 					break;
 					default:
-					System.out.println("No es la respuesta que esperaba. " +
+					System.out.print("No es la respuesta que esperaba. " +
 					"\u00BFDeseas que me suspenda?(S/N)");
 				}
 			}
@@ -92,7 +99,7 @@ public class Caminando implements EstadoRobot {
 	 * <code>Activado</code>. No hace nada en este estado
 	 */
 	public void activar() {
-		System.out.println("Ya estoy activado");
+		System.out.println("Ya estoy activado\n");
 	}
 	
 	/**
@@ -100,7 +107,7 @@ public class Caminando implements EstadoRobot {
 	 * estado <code>RecibiendoOrden</code>. No hace nada en este estado
 	 */
 	public void tomarOrden() {
-		System.out.println("Ya he tomado una orden");
+		System.out.println("Ya he tomado una orden\n");
 	}
 	
 	/**
@@ -108,13 +115,15 @@ public class Caminando implements EstadoRobot {
 	 */
 	public void trabajar() {
 		if(robot.obtenerMaerial() && robot.obtenerCasa() != null) {
-			System.out.println("Ya que tengo material, ire a trabajar.");
+			System.out.println("Ya que tengo material, ire a trabajar\n");
 			robot.cambiarEstado(new Trabajando(robot));
 		} else if(robot.obtenerCasa() != null){
-			System.out.println("No puedo trabajar sin material.");
+			System.out.println("No puedo trabajar sin material. Ire a reabast" +
+				"ecerme\n");
 			robot.cambiarEstado(new Reabasteciendo(robot));
 		} else {
-			System.out.println("Ya temine mi trabajo, voy al area de descanzo");
+			System.out.println("Ya temine mi trabajo, voy al area de descanz" +
+				"o\n");
 			robot.cambiarEstado(new Suspendido(robot));
 		}
 	}
@@ -126,13 +135,15 @@ public class Caminando implements EstadoRobot {
 	public void reabastecer() {
 		if(robot.obtenerMaerial() && robot.obtenerCasa() != null) {
 			System.out.println("No tengo necesidad de reabastecer. Ire a trab" + 
-			"ajar.");
+			"ajar\n");
 			robot.cambiarEstado(new Trabajando(robot));
 		} else if (robot.obtenerCasa() != null) {
-			System.out.println("Conseguire materiales.");
+			System.out.println("Conseguire materiales en el area correspondie" +
+			"nte\n");
 			robot.cambiarEstado(new Reabasteciendo(robot));
 		} else {
-			System.out.println("Ya temine mi trabajo, voy al area de descanzo");
+			System.out.println("Ya temine mi trabajo, voy al area de descanzo" +
+			"\n");
 			robot.cambiarEstado(new Suspendido(robot));
 		}
 	}

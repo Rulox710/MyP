@@ -7,6 +7,7 @@ public class ReforzadoAisladoReforzado extends EsqueletoReforzado {
 	public ReforzadoAisladoReforzado() {
 		super();
 		costo += 3000;
+		nombre += "y aislado reforzado";
 	} 
 	
 	/**

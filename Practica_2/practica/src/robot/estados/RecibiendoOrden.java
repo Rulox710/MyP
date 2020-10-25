@@ -1,6 +1,8 @@
 package robot.estados;
 
-import escritura.Escritor;
+import utilidad.Escritor;
+import utilidad.Color;
+import utilidad.CaracterEspecial;
 import robot.Robot;
 import robot.EstadoRobot;
 import casa.Casa;
@@ -32,7 +34,7 @@ public class RecibiendoOrden implements EstadoRobot {
 	 * <code>Suspendido</code>. No hace nada en este estado.
 	 */
 	public void suspender() {
-		System.out.println("Estoy tomando una orden, no puedes suspenderme :(");
+		System.out.println("Estoy tomando una orden, no puedes suspenderme\n");
 	}
 	
 	/**
@@ -40,7 +42,8 @@ public class RecibiendoOrden implements EstadoRobot {
 	 * <code>Activado</code>. No hace nada en este estado
 	 */
 	public void activar() {
-		System.out.println("Ya estoy activado");
+		System.out.println("Ya estoy activado, no necesita activarme de nuev" +
+		"o\n");
 	}
 	
 	/**
@@ -50,37 +53,50 @@ public class RecibiendoOrden implements EstadoRobot {
 	public void tomarOrden() {
 		System.out.println("Procedere a preguntar por las especificaciones de" +
 		" la casa.\n \u00BFQue clase de esqueleto tendra? Escriba el numero");
-		
 		System.out.println("1. Esqueleto de concreto");
 		System.out.println("2. Esqueleto reforzado");
 		boolean verdad = true, esConcreto = true;
 		while(verdad) {
+			
 			String s = Escritor.leerCadena();
+			System.out.print(CaracterEspecial.arribaN(1) + 
+				CaracterEspecial.limpiaLin());
 			switch(s) {
 				case "1":
+				System.out.print(CaracterEspecial.arribaN(2) + 
+					CaracterEspecial.limpiaLinSig());
+				System.out.println("Escogio esqueleto de concreto");
 				verdad = false;
 				break;
 				case "2":
+				System.out.print(CaracterEspecial.arribaN(2) + 
+					CaracterEspecial.limpiaLinSig());
+				System.out.println("Escogio esqueleto reforzado");
 				esConcreto = false;
 				verdad = false;
 				break;
 				default:
-				System.out.println("No es la respuesta que esperaba. Escriba " +
+				System.out.print("No es la respuesta que esperaba. Escriba " +
 				"un numero en el rango(1/2)");
 			}
 		}
 		verdad = true;
-		System.out.println("\u00BFQue clase de aislamiento tendra? Escriba el nume" +
-		"ro");
+		System.out.println("\u00BFQue clase de aislamiento tendra? Escriba el" +
+		" numero");
 		System.out.println("1. Aislamiento de concreto");
 		System.out.println("2. Aislamiento de vidiro");
 		System.out.println("3. Aislamiento de madera");
 		System.out.println("4. Aislamiento de reforzado");
-
 		while(verdad) {
+			
 			String s = Escritor.leerCadena();
+			System.out.print(CaracterEspecial.arribaN(1) + 
+				CaracterEspecial.limpiaLin());
 			switch(s) {
 				case "1":
+				System.out.print(CaracterEspecial.arribaN(4) + 
+					CaracterEspecial.limpiaLinSig());
+				System.out.println("Escogio aislado de concreto");
 				if(esConcreto) {
 					robot.asignarCasa(new ConcretoAisladoConcreto());
 				} else {
@@ -89,6 +105,9 @@ public class RecibiendoOrden implements EstadoRobot {
 				verdad = false;
 				break;
 				case "2":
+				System.out.print(CaracterEspecial.arribaN(4) + 
+					CaracterEspecial.limpiaLinSig());
+				System.out.println("Escogio aislado de vidrio");
 				if(esConcreto) {
 					robot.asignarCasa(new ConcretoAisladoVidrio());
 				} else {
@@ -97,6 +116,9 @@ public class RecibiendoOrden implements EstadoRobot {
 				verdad = false;
 				break;
 				case "3":
+				System.out.print(CaracterEspecial.arribaN(4) + 
+					CaracterEspecial.limpiaLinSig());
+				System.out.println("Escogio aislado de madera");
 				if(esConcreto) {
 					robot.asignarCasa(new ConcretoAisladoMadera());
 				} else {
@@ -105,6 +127,9 @@ public class RecibiendoOrden implements EstadoRobot {
 				verdad = false;
 				break;
 				case "4":
+				System.out.print(CaracterEspecial.arribaN(4) + 
+					CaracterEspecial.limpiaLinSig());
+					System.out.println("Escogio aislado refozado");
 				if(esConcreto) {
 					robot.asignarCasa(new ConcretoAisladoReforzado());
 				} else {
@@ -113,11 +138,11 @@ public class RecibiendoOrden implements EstadoRobot {
 				verdad = false;
 				break;
 				default:
-				System.out.println("No es la respuesta que esperaba. Escriba " +
+				System.out.print("No es la respuesta que esperaba. Escriba " +
 				"un numero en el rango(1/2/3/4)");
 			}
 		}
-		System.out.println("\nMe retiro para juntar los materiales.");
+		System.out.println("Me retiro para juntar los materiales\n");
 		robot.cambiarEstado(new Caminando(robot));
 	}
 	
@@ -126,7 +151,7 @@ public class RecibiendoOrden implements EstadoRobot {
 	 * en este estado
 	 */
 	public void trabajar() {
-		System.out.println("No voy a trabajar sin una orden clara.");
+		System.out.println("No voy a trabajar sin una orden clara\n");
 	}
 	
 	/**
@@ -134,7 +159,7 @@ public class RecibiendoOrden implements EstadoRobot {
 	 * una <code>Casa</code>. No hara nada en este estado
 	 */
 	public void reabastecer() {
-		System.out.println("No tengo necesidad de reabastecer.");
+		System.out.println("No tengo necesidad de reabastecer\n");
 	}
 	
 	/**

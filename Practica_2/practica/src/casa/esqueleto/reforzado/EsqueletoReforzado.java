@@ -6,7 +6,8 @@ public abstract class EsqueletoReforzado extends Casa {
 	
 	public EsqueletoReforzado() {
 		super();
-		costo += 5000;
+		costo += 1000;
+		nombre += "con esqueleto reforzado ";
 	}
 	/**
 	 * Metodo para construir el esqueleto de la casa

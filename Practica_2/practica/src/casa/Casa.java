@@ -1,5 +1,7 @@
 package casa;
 
+import utilidad.CaracterEspecial;
+
 /**
  * Clase abstracta que modela el proceso de creacion de una <code>casa</code>
  */
@@ -10,11 +12,14 @@ public abstract class Casa {
 	 */
 	protected double costo;
 	
+	protected String nombre;
+	
 	/**
 	 * Constructor de la clase
 	 */
 	public Casa() {
 		costo = 1000;
+		nombre = "Casa ";
 	}
 	
 	/**
@@ -23,11 +28,45 @@ public abstract class Casa {
 	public void construccion() {
 		System.out.println("Se empezara a construir la casa.");
 		prepararTerreno();
+		falsoAvance();
 		colocarCimientos();
+		falsoAvance();
 		construirEsqueleto();
+		falsoAvance();
 		instalarElectricidad();
+		falsoAvance();
 		aislarCasa();
+		falsoAvance();
 		acabados();
+		falsoAvance();
+		System.out.println("");
+	}
+	
+	/**
+	 * Metodo privado que da la ilusion de progreso
+	 */
+	private void falsoAvance() {
+		for (int i = 1; i < 9; i++){
+			switch(i%4){
+				case 1:
+				System.out.print("/"+CaracterEspecial.izquierdaN(1));
+				break;
+				case 2:
+				System.out.print("-"+CaracterEspecial.izquierdaN(1));
+				break;
+				case 3:
+				System.out.print("\\"+CaracterEspecial.izquierdaN(1));
+				break;
+				case 4:
+				System.out.print("|"+CaracterEspecial.izquierdaN(1));
+				break;
+			}
+			try{
+				Thread.sleep(60);
+			} catch(Exception e){
+			}
+		}
+		
 	}
 	
 	/**
@@ -69,13 +108,10 @@ public abstract class Casa {
 	}
 	
 	/**
-	 * Metodo que devuelve el <code>costo</code> de la <code>Casa</code>
+	 * Metodo para ver el nombre de a una <code>Casa</code>
+	 * @return Nombre de la casa en una cadena
 	 */
-	public double obtenerCosto(){
-		return costo;
-	}
-	
 	public String toString() {
-		return "Casa de costo: " + costo;
+		return nombre + " de costo: " + costo;
 	}
 }

@@ -1,6 +1,6 @@
 package robot.estados;
 
-import escritura.Escritor;
+import utilidad.Escritor;
 import robot.Robot;
 import robot.EstadoRobot;
 import casa.Casa;
@@ -28,7 +28,8 @@ public class Reabasteciendo implements EstadoRobot {
 	 * <code>Suspendido</code>. No hace nada en este estado
 	 */
 	public void suspender() {
-		System.out.println("Estoy reabasteciendome");
+		System.out.println("Estoy en el area de reabastecimiento, no me puedo" +
+			" suspender,\n");
 	}
 	
 	/**
@@ -36,7 +37,8 @@ public class Reabasteciendo implements EstadoRobot {
 	 * <code>Activado</code>. No hace nada en este estado
 	 */
 	public void activar() {
-		System.out.println("Ya estoy activado");
+		System.out.println("Ya estoy activado, no necesita activarme de nuevo" +
+		"\n");
 	}
 	
 	/**
@@ -44,14 +46,14 @@ public class Reabasteciendo implements EstadoRobot {
 	 * estado <code>RecibiendoOrden</code>. No hace nada en este estado
 	 */
 	public void tomarOrden() {
-		System.out.println("Ya he tomado una orden");
+		System.out.println("Ya he tomado una orden\n");
 	}
 	
 	/**
 	 * Metodo para que el <code>Robot</code> comience a trabajar.
 	 */
 	public void trabajar() {
-		System.out.println("Aun no tengo materiales para trabajar");
+		System.out.println("No es el lugar indicado para contruir\n");
 	}
 	
 	/**
@@ -60,11 +62,11 @@ public class Reabasteciendo implements EstadoRobot {
 	 */
 	public void reabastecer() {
 		if(robot.obtenerMaerial()){
-			System.out.println("Ya tengo material, asi que ire a trabajar");
+			System.out.println("Ya tengo material, asi que ire a trabajar\n");
 		} else {
-			System.out.println("Recolectando materiales. Ahora ire a trabajar");
+			System.out.println("Recolectando materiales. Ahora ire a trabaja" +
+			"r\n");
 			robot.asignarMaterial(true);
-			robot.cambiarEstado(new Caminando(robot));
 		}
 		robot.cambiarEstado(new Caminando(robot));
 	}

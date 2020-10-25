@@ -6,7 +6,8 @@ public abstract class EsqueletoConcreto extends Casa {
 	
 	public EsqueletoConcreto() {
 		super();
-		costo += 1000;
+		costo += 500;
+		nombre += "con esqueleto de concreto ";
 	}
 	
 	/**

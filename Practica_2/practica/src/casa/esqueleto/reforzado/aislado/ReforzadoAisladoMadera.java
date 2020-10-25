@@ -7,6 +7,7 @@ public class ReforzadoAisladoMadera extends EsqueletoReforzado {
 	public ReforzadoAisladoMadera() {
 		super();
 		costo += 1000;
+		nombre += "y aislado de madera";
 	}
 	/**
 	 * Metodo para aislar la <code>Casa</code>

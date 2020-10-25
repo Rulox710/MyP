@@ -7,6 +7,7 @@ public class ConcretoAisladoReforzado extends EsqueletoConcreto {
 	public ConcretoAisladoReforzado() {
 		super();
 		costo += 3000;
+		nombre += "y aislado reforzado";
 	}
 	
 	/**
@@ -14,6 +15,5 @@ public class ConcretoAisladoReforzado extends EsqueletoConcreto {
 	 */
 	protected void aislarCasa() {
 		System.out.println("Se hara un aislado de reforzado");
-		costo += 3000;
 	}
 }

@@ -7,6 +7,7 @@ public class ConcretoAisladoConcreto extends EsqueletoConcreto {
 	public ConcretoAisladoConcreto(){
 		super();
 		costo += 2000;
+		nombre += "y aislado de concreto";
 	}
 	
 	/**

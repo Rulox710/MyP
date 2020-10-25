@@ -1,4 +1,4 @@
-package escritura;
+package utilidad;
 
 import java.util.Scanner;
 
