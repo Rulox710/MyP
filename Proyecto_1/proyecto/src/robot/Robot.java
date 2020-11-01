@@ -160,7 +160,7 @@ public class Robot {
 	
 	/**
 	 * Metodo para asignar un platillo a cocinar
-	 * @param Un platillo a preparar
+	 * @param platillo Un platillo a preparar
 	 */
 	public void asignarPlatillo(MenuItem platillo) {
 		this.platillo = platillo;

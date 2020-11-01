@@ -17,6 +17,11 @@ public class Mercancia {
 	
 	/**
 	 * Constructor de la clase
+	 * @param nombre Una cadena que representa su nombre
+	 * @param tipoArticulo Una cadena que representa el tipo de articulo que es
+	 * @param color Una cadena que representa su color
+	 * @param material Una cadena que indica el material del que esta hecho
+	 * @param costo Un numero que reppresenta su precio
 	 */
 	public Mercancia(String nombre, String tipoArticulo, String color, 
 		String material, double costo){

@@ -19,7 +19,7 @@ public class Ticket {
 	
 	/**
 	 * Hace el <code>Tiket</code> en una cadena
-	 * @param Una cadena
+	 * @return Una cadena
 	 */
 	@Override
 	public String toString() {
