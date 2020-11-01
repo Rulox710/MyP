@@ -2,6 +2,7 @@ package menu.pizza;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import menu.Menu;
 import productos.menu.MenuItem;
 import productos.mercancia.AdaptadorMenuItem;
 import productos.menu.pizza.Pizza;
@@ -9,7 +10,7 @@ import productos.menu.pizza.Pizza;
 /**
  * Clase que modela el menu de los burritos
  */
-public class MenuPizza {
+public class MenuPizza implements Menu{
 	
 	/**
 	 * Arreglo de <code>ItemMenu</code>
@@ -36,10 +37,10 @@ public class MenuPizza {
 	 * agregado
 	 * @return <code>true</code> si es agregado, <code>false</code> si no
 	 */
-	public boolean agregarPizza(MenuItem pi) {
+	public boolean agregar(MenuItem pi) {
 		if (pi instanceof AdaptadorMenuItem || pi instanceof Pizza) {
 			if(posicion == menu.length) {
-				MenuItem[] nuevo = new MenuItem[menu.length*2];
+				MenuItem[] nuevo = new MenuItem[menu.length+1];
 				System.arraycopy(menu,0,nuevo,0,menu.length);
 				menu = nuevo;
 			}
@@ -51,13 +52,10 @@ public class MenuPizza {
 	}
 	
 	/**
-	 * Metodo para obtener el arreglo del menu
-	 * @return Arreglo con las pizas
+	 * Metodo que devuelve la cantidad de elementos en el <code>Menu</code>
+	 * @return Un numero entero
 	 */
-	public MenuItem[] obtenerMenu() {
-		return menu;
-	}
-	
+	@Override
 	public int obtenerElementos() {
 		return menu.length;
 	}
@@ -66,7 +64,8 @@ public class MenuPizza {
 	 * Metodo para obtener un iterador del menu
 	 * @return <code>Iterator</code> del menu
 	 */
-	public Iterator obtenerIterador() {
+	@Override
+	public Iterator<MenuItem> obtenerIterador() {
 		return Arrays.asList(menu).iterator();
 	}
 }

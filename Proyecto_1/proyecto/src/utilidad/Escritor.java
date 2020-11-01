@@ -7,7 +7,6 @@ import utilidad.consola.CaracterEspecial;
 /**
  * Clase para leer cadenas o validarlas bajo ciertas condiciones
  * @author Raul Nunio
- * @version 1.2
  */
 public final class Escritor{
 

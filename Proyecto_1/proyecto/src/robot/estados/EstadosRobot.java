@@ -1,12 +1,10 @@
 package robot.estados;
 
+/**
+ * Clase que modela al <code>Robot</code> en diferentes estados
+ */
 public interface EstadosRobot {
-	
-	/**
-	 * Metodo para suspender al <code>Robot</code>
-	 */
-	public abstract void suspender();
-	
+
 	/**
 	 * Metodo para que el <code>Robot</code> se active y atienda
 	 */

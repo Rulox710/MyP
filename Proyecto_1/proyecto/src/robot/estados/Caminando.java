@@ -3,6 +3,9 @@ package robot.estados;
 import utilidad.Impresor;
 import robot.Robot;
 
+/**
+ * Clase que modela al <code>Robot</code> cuando esta <code>Caminando</code>
+ */
 public class Caminando implements EstadosRobot {
 	
 	/**
@@ -16,14 +19,6 @@ public class Caminando implements EstadosRobot {
 	 */
 	public Caminando(Robot robot) {
 		this.robot = robot;
-	}
-	
-	/**
-	 * Metodo para suspender al <code>Robot</code>
-	 */
-	@Override
-	public void suspender() {
-		Impresor.imprimirAlerta("No puedo hacer eso ahora");
 	}
 	
 	/**
@@ -47,7 +42,14 @@ public class Caminando implements EstadosRobot {
 	 */
 	@Override
 	public void cocinar() {
-		robot.cambiarEstado(new Cocinando(robot));
+		if(!robot.obtenerOrdenLista()) {
+			Impresor.imprimirInfo("Voy al area para cocinar");
+			robot.cambiarEstado(new Cocinando(robot));
+		} else {
+			Impresor.imprimirInfo("Voy al area para entregar el producto");
+			robot.cambiarEstado(new Atendiendo(robot));
+		}
+		
 	}
 	
 	/**
@@ -55,7 +57,13 @@ public class Caminando implements EstadosRobot {
 	 */
 	@Override
 	public void entregarProducto() {
-		robot.cambiarEstado(new Atendiendo(robot));
+		if(robot.obtenerOrdenLista()){
+			Impresor.imprimirInfo("Voy al area para entregar el producto");
+			robot.cambiarEstado(new Atendiendo(robot));
+		} else {
+			Impresor.imprimirInfo("Voy al area para cocinar");
+			robot.cambiarEstado(new Cocinando(robot));
+		}
 	}
 	
 	/**

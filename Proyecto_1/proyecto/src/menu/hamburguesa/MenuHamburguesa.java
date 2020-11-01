@@ -2,6 +2,7 @@ package menu.hamburguesa;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import menu.Menu;
 import productos.menu.MenuItem;
 import productos.mercancia.AdaptadorMenuItem;
 import productos.menu.hamburguesa.Hamburguesa;
@@ -9,7 +10,7 @@ import productos.menu.hamburguesa.Hamburguesa;
 /**
  * Clase que modela el menu de los burritos
  */
-public class MenuHamburguesa {
+public class MenuHamburguesa implements Menu{
 	
 	/**
 	 * <code>List</code> de <code>MenuItem</code>
@@ -30,20 +31,17 @@ public class MenuHamburguesa {
 	 * agregado
 	 * @return <code>true</code> si es agregado, <code>false</code> si no
 	 */
-	public boolean agregarHamburguesa(MenuItem mi) {
+	public boolean agregar(MenuItem mi) {
 		if (mi instanceof AdaptadorMenuItem || mi instanceof Hamburguesa)
 			return menu.add(mi);
 		return false;
 	}
 	
 	/**
-	 * Metodo para obtener la lista del menu
-	 * @return <code>List</code> con las hamburguesas
+	 * Metodo que devuelve la cantidad de elementos en el <code>Menu</code>
+	 * @return Un numero entero
 	 */
-	public ArrayList<MenuItem> obtenerMenu() {
-		return menu;
-	}
-	
+	@Override
 	public int obtenerElementos() {
 		return menu.size();
 	}
@@ -52,7 +50,8 @@ public class MenuHamburguesa {
 	 * Metodo para obtener un iterador del menu
 	 * @return <code>Iterator</code> del menu
 	 */
-	public Iterator obtenerIterador() {
+	@Override
+	public Iterator<MenuItem> obtenerIterador() {
 		return menu.iterator();
 	}
 	

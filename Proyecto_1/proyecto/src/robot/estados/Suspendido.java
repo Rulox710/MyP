@@ -4,6 +4,9 @@ import utilidad.Impresor;
 import utilidad.Escritor;
 import robot.Robot;
 
+/**
+ * Clase que modela al <code>Robot</code> cuando esta <code>Suspendido</code>
+ */
 public class Suspendido implements EstadosRobot {
 	
 	/**
@@ -17,14 +20,6 @@ public class Suspendido implements EstadosRobot {
 	 */
 	public Suspendido(Robot robot) {
 		this.robot = robot;
-	}
-	
-	/**
-	 * Metodo para suspender al <code>Robot</code>
-	 */
-	@Override
-	public void suspender() {
-		Impresor.imprimirAlerta("No puedo hacer eso ahora");
 	}
 	
 	/**
@@ -47,7 +42,8 @@ public class Suspendido implements EstadosRobot {
 				verdad = false;
 				break;
 				default:
-				Impresor.imprimirError("No ha seleccionado una opcion valida");
+				Impresor.imprimirError("No ha seleccionado una opcion valida," +
+					" intente de nuevo(S/N)");
 			}
 		} while(verdad);
 	}

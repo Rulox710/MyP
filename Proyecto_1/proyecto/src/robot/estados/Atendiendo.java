@@ -4,9 +4,14 @@ import java.util.Iterator;
 import robot.Robot;
 import utilidad.Escritor;
 import utilidad.Impresor;
+import utilidad.consola.CaracterEspecial;
+import productos.Ticket;
 import productos.menu.MenuItem;
 import productos.mercancia.AdaptadorMenuItem;
 
+/**
+ * Clase que modela al <code>Robot</code> cuando esta <code>Atendiendo</code>
+ */
 public class Atendiendo implements EstadosRobot {
 	
 	/**
@@ -20,14 +25,6 @@ public class Atendiendo implements EstadosRobot {
 	 */
 	public Atendiendo(Robot robot) {
 		this.robot = robot;
-	}
-	
-	/**
-	 * Metodo para suspender al <code>Robot</code>
-	 */
-	@Override
-	public void suspender() {
-		Impresor.imprimirAlerta("No puedo hacer eso ahora");
 	}
 	
 	/**
@@ -47,50 +44,54 @@ public class Atendiendo implements EstadosRobot {
 			Impresor.imprimirInfo("Estos son los menus");
 			int i = robot.imprimirMenu();
 			boolean verdad = true;
-			int entero;
+			int entero = 0;
 			Impresor.imprimirInfo("\u00BFque desea ordenar?(De el numero del" +
 				" platillo)");
+			int borrar = i+7;
 			do {
 				String str = Escritor.leerCadena();
 				if (Escritor.validarNumericoEntero(str)) {
 					entero = Integer.parseInt(str);  
 					if(entero > 0 && entero < i) {
 						verdad = false;
+						System.out.print(CaracterEspecial.arribaN(borrar) + CaracterEspecial.limpiaLinSig());
 					} else {
 						Impresor.imprimirError("No es un numero en el rango d" +
 							"e los menus, intente de nuevo");
+						borrar++;
 					}
 				} else {
 					Impresor.imprimirError("No es un numero, intente de nuevo");
+					borrar++;
 				}
 			} while(verdad);
-			int contador = 0;
+			int contador = 1;
 			MenuItem mi = null;
-			if(robot.obtenerTamanioHamburguesa() - i < -1) {
-				if(robot.obtenerTamanioPizza() - i < -1) {
+			if(robot.obtenerTamanioHamburguesa() - entero < 0) {
+				if(robot.obtenerTamanioHamburguesa() + 
+					robot.obtenerTamanioPizza() - entero < 0) {
 					Iterator<MenuItem> it = robot.obtenerMenuBurrito();
 					contador = robot.obtenerTamanioHamburguesa() + 
 						robot.obtenerTamanioPizza();
-					while(it.hasNext() && contador < i) {
+					while(it.hasNext() && contador++ < entero) {
 						mi = it.next();
-						contador++;
 					}
 				} else {
 					Iterator<MenuItem> it = robot.obtenerMenuPizza();
 					contador = robot.obtenerTamanioHamburguesa();
-					while(it.hasNext() && contador < i) {
+					while(it.hasNext() && contador++ < entero) {
 						mi = it.next();
-						contador++;
 					}
 				}
 			} else { 
 				Iterator<MenuItem> it = robot.obtenerMenuHamburguesa();
-				while(it.hasNext() && contador < i) {
+				while(it.hasNext() && contador++ <= entero) {
 					mi = it.next();
-					contador++;
 				}
 			}
+			Impresor.imprimirAlerta("Se escogio: " + mi.obtenerNombre());
 			robot.asignarPlatillo(mi);
+			
 			if(mi instanceof AdaptadorMenuItem) {
 				entregarProducto();
 			} else {
@@ -115,10 +116,11 @@ public class Atendiendo implements EstadosRobot {
 	@Override
 	public void entregarProducto() {
 		if(robot.obtenerPlatillo() != null){
-			MenuItem mi = robot.obtenerPlatillo();
-			Impresor.imprimirBien("Se entrega un: " + mi.obtenerNombre() + "." + 
-				" Vuelva pronto");
+			Ticket ticket = new Ticket(robot.obtenerPlatillo());
+			Impresor.imprimirInfo("Se entrega el ticket de compra");
+			Impresor.imprimirBien(ticket.toString());
 			robot.asignarPlatillo(null);
+			robot.asignarOrdenLista(false);
 			robot.cambiarEstado(new Suspendido(robot));
 		} else {
 			mostrarMenu();

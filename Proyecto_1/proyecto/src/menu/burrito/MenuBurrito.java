@@ -3,6 +3,7 @@ package menu.burrito;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Collection;
+import menu.Menu;
 import productos.menu.MenuItem;
 import productos.mercancia.AdaptadorMenuItem;
 import productos.menu.burrito.Burrito;
@@ -10,7 +11,7 @@ import productos.menu.burrito.Burrito;
 /**
  * Clase que modela el menu de los burritos
  */
-public class MenuBurrito {
+public class MenuBurrito implements Menu {
 	
 	/**
 	 * <code>Hashtable</code> de <code>MenuItem</code>
@@ -38,7 +39,8 @@ public class MenuBurrito {
 	 * agregado
 	 * @return <code>true</code> si es agregado, <code>false</code> si no
 	 */
-	public boolean agregarBurrito(MenuItem bu) {
+	@Override
+	public boolean agregar(MenuItem bu) {
 		if (bu instanceof AdaptadorMenuItem || bu instanceof Burrito) {
 			menu.put(claveActual++, bu);
 			return true;
@@ -47,13 +49,10 @@ public class MenuBurrito {
 	}
 	
 	/**
-	 * Metodo para obtener la tabla hash del menu
-	 * @return <code>Hashtable</code> con los burritos
+	 * Metodo que devuelve la cantidad de elementos en el <code>Menu</code>
+	 * @return Un numero entero
 	 */
-	public Hashtable<Integer, MenuItem> obtenerMenu() {
-		return menu;
-	}
-	
+	@Override
 	public int obtenerElementos() {
 		return menu.size();
 	}
@@ -62,7 +61,8 @@ public class MenuBurrito {
 	 * Metodo para obtener un iterador del menu
 	 * @return <code>Iterator</code> del menu
 	 */
-	public Iterator obtenerIterador() {
+	@Override
+	public Iterator<MenuItem> obtenerIterador() {
 		return menu.values().iterator();
 	}
 }

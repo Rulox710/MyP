@@ -11,6 +11,9 @@ import robot.cocinar.CocinarBurrito;
 import robot.cocinar.CocinarHamburguesa;
 import robot.cocinar.CocinarPizza;
 
+/**
+ * Clase que modela al <code>Robot</code> cuando esta <code>Cocinando</code>
+ */
 public class Cocinando implements EstadosRobot {
 
 	/**
@@ -24,14 +27,6 @@ public class Cocinando implements EstadosRobot {
 	 */
 	public Cocinando(Robot robot) {
 		this.robot = robot;
-	}
-	
-	/**
-	 * Metodo para suspender al <code>Robot</code>
-	 */
-	@Override
-	public void suspender() {
-		Impresor.imprimirAlerta("No puedo hacer eso ahora");
 	}
 	
 	/**
@@ -69,6 +64,8 @@ public class Cocinando implements EstadosRobot {
 		}
 		
 		cocina.cocinar();
+		robot.asignarOrdenLista(true);
+		robot.cambiarEstado(new Caminando(robot));
 	}
 	
 	/**
