@@ -42,7 +42,7 @@ public class Caminando implements EstadosRobot {
 	 */
 	@Override
 	public void cocinar() {
-		if(!robot.obtenerOrdenLista()) {
+		if(robot.obtenerPlatillo() == null) {
 			Impresor.imprimirInfo("Voy al area para cocinar");
 			robot.cambiarEstado(new Cocinando(robot));
 		} else {
@@ -57,7 +57,7 @@ public class Caminando implements EstadosRobot {
 	 */
 	@Override
 	public void entregarProducto() {
-		if(robot.obtenerOrdenLista()){
+		if(robot.obtenerPlatillo() != null){
 			Impresor.imprimirInfo("Voy al area para entregar el producto");
 			robot.cambiarEstado(new Atendiendo(robot));
 		} else {

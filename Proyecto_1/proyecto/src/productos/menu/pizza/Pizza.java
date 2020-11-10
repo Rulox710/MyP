@@ -2,7 +2,7 @@ package productos.menu.pizza;
 
 import productos.menu.MenuItem;
 
-public class Pizza implements MenuItem {
+public class Pizza extends MenuItem {
 	
 	/**
 	 * Cadenas que represantan el nombre y la descripcion del objeto
@@ -26,47 +26,8 @@ public class Pizza implements MenuItem {
 	 * @param esVegetariano Boleano que indica si es vegetariono o no
 	 * @param costo El costo del platillo
 	 */
-	public Pizza(String nombre, String descripcion, boolean esVegetariano, 
+	 public Pizza(String nombre, String descripcion, boolean esVegetariano, 
 		double costo){
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.esVegetariano = esVegetariano;
-		this.costo = costo;
-	}
-	
-	/**
-	 * Metodo que obtiene <code>nombre</code>
-	 * @return Una cadena
-	 */
-	@Override
-	public String obtenerNombre() {
-		return nombre;
-	}
-	
-	/**
-	 * Metodo que obtiene <code>descripcion</code>
-	 * @return Una cadena
-	 */
-	@Override
-	public String obtenerDescripcion() {
-		return descripcion;
-	}
-	
-	/**
-	 * Metodo que obtiene <code>esVegetariano</code>
-	 * @return Un boleano
-	 */
-	@Override
-	public boolean obtenerEsVegetariano() {
-		return esVegetariano;
-	}
-	
-	/**
-	 * Obtiene el costo del platillo
-	 * @return Un <code>double</code>
-	 */
-	@Override
-	public double obtenerCosto() {
-		return costo;
+		super(nombre, descripcion, esVegetariano, costo);
 	}
 }

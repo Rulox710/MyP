@@ -2,7 +2,7 @@ package productos.menu.hamburguesa;
 
 import productos.menu.MenuItem;
 
-public class Hamburguesa implements MenuItem {
+public class Hamburguesa extends MenuItem {
 	
 	/**
 	 * Cadenas que represantan el nombre y la descripcion del objeto
@@ -26,48 +26,8 @@ public class Hamburguesa implements MenuItem {
 	 * @param esVegetariano Boleano que indica si es vegetariono o no
 	 * @param costo El costo del platillo
 	 */
-	public Hamburguesa(String nombre, String descripcion, boolean esVegetariano, 
+	 public Hamburguesa(String nombre, String descripcion, boolean esVegetariano, 
 		double costo){
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.esVegetariano = esVegetariano;
-		this.costo = costo;
+		super(nombre, descripcion, esVegetariano, costo);
 	}
-	
-	/**
-	 * Metodo que obtiene <code>nombre</code>
-	 * @return Una cadena
-	 */
-	@Override
-	public String obtenerNombre() {
-		return nombre;
-	}
-	
-	/**
-	 * Metodo que obtiene <code>descripcion</code>
-	 * @return Una cadena
-	 */
-	@Override
-	public String obtenerDescripcion() {
-		return descripcion;
-	}
-	
-	/**
-	 * Metodo que obtiene <code>esVegetariano</code>
-	 * @return Un boleano
-	 */
-	@Override
-	public boolean obtenerEsVegetariano() {
-		return esVegetariano;
-	}
-	
-	/**
-	 * Obtiene el costo del platillo
-	 * @return Un <code>double</code>
-	 */
-	@Override
-	public double obtenerCosto() {
-		return costo;
-	}
-	 
 }

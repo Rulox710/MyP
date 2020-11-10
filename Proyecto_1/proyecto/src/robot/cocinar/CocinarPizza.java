@@ -1,7 +1,8 @@
 package robot.cocinar;
 
 import utilidad.Impresor;
-import productos.menu.MenuItem;
+import menu.MenuComponente;
+import robot.Robot;
 
 /**
  * Clase para cocinar en el modulo de pizza
@@ -9,15 +10,21 @@ import productos.menu.MenuItem;
 public class CocinarPizza implements Cocinar {
 	
 	/**
-	 * Un <code>MenuItem</code>
+	 * Un <code>Robot</code>
 	 */
-	private MenuItem platillo;
+	private Robot robot;
+	
+	/**
+	 * Un <code>MenuComponente</code>
+	 */
+	private MenuComponente platillo;
 	
 	/**
 	 * Contrucctor de la clase
 	 * @param platillo Un <code>MenuItem</code> 
 	 */
-	public CocinarPizza(MenuItem platillo) {
+	public CocinarPizza(Robot robot, MenuComponente platillo) {
+		this.robot = robot;
 		this.platillo = platillo;
 	}
 	
@@ -32,6 +39,7 @@ public class CocinarPizza implements Cocinar {
 		ponerIngredientes();
 		hornear();
 		empaquetar();
+		robot.asignarPlatillo(platillo);
 		Impresor.imprimirBien("Se termino de preparar la pizza");
 	}
 	

@@ -1,8 +1,9 @@
 package robot.estados;
 
+import java.util.Iterator;
 import utilidad.Impresor;
 import robot.Robot;
-import productos.menu.MenuItem;
+import menu.MenuComponente;
 import productos.menu.burrito.Burrito;
 import productos.menu.hamburguesa.Hamburguesa;
 import productos.menu.pizza.Pizza;
@@ -51,20 +52,27 @@ public class Cocinando implements EstadosRobot {
 	@Override
 	public void cocinar() {
 		Cocinar cocina = null;
-		if(robot.obtenerPlatillo() instanceof Hamburguesa) {
-			cocina = new CocinarHamburguesa(robot.obtenerPlatillo());
+		MenuComponente mi = null;
+		Iterator<MenuComponente> iterador = robot.obtenerIteradorMenu();
+		int num = robot.obtenerNumeroPlatillo(); 
+		int contador = 1;
+		while(iterador.hasNext() && contador++ <= num){
+			mi = iterador.next();
+		}
+		robot.asignarNumeroPlatillo(-1);
+		if(mi instanceof Hamburguesa) {
+			cocina = new CocinarHamburguesa(robot, mi);
 		}
 		
-		if(robot.obtenerPlatillo() instanceof Pizza) {
-			cocina = new CocinarPizza(robot.obtenerPlatillo());
+		if(mi instanceof Pizza) {
+			cocina = new CocinarPizza(robot, mi);
 		}
 		
-		if(robot.obtenerPlatillo() instanceof Burrito) {
-			cocina = new CocinarBurrito(robot.obtenerPlatillo());
+		if(mi instanceof Burrito) {
+			cocina = new CocinarBurrito(robot, mi);
 		}
 		
 		cocina.cocinar();
-		robot.asignarOrdenLista(true);
 		robot.cambiarEstado(new Caminando(robot));
 	}
 	

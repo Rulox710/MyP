@@ -1,19 +1,19 @@
 package productos;
 
-import productos.menu.MenuItem;
+import menu.MenuComponente;
 
 /**
  * Clase que modela un ticket de compra de un producto
  */
 public class Ticket {
 	
-	MenuItem mi;
+	private MenuComponente mi;
 	
 	/**
 	 * Contructor de la clase
 	 * @param mi Un item 
 	 */
-	public Ticket(MenuItem mi) {
+	public Ticket(MenuComponente mi) {
 		this.mi = mi;
 	}
 	

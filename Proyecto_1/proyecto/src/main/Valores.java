@@ -7,9 +7,11 @@ import productos.menu.pizza.Pizza;
 import productos.menu.burrito.Burrito;
 import productos.menu.hamburguesa.Hamburguesa;
 import productos.menu.MenuItem;
-import menu.pizza.MenuPizza;
-import menu.hamburguesa.MenuHamburguesa;
-import menu.burrito.MenuBurrito;
+import menu.MenuComponente;
+import menu.menus.Menu;
+import menu.menus.pizza.MenuPizza;
+import menu.menus.hamburguesa.MenuHamburguesa;
+import menu.menus.burrito.MenuBurrito;
 
 /**
  * Clase con valores para la ejecucion del proyecto
@@ -19,9 +21,10 @@ public class Valores {
 	/**
 	 * Inicia los tres menus predeterminados
 	 */
-	public static MenuHamburguesa mh = new MenuHamburguesa();
-	public static MenuPizza mp = new MenuPizza();
-	public static MenuBurrito mb = new MenuBurrito();
+	public static MenuHamburguesa mh = new MenuHamburguesa("");
+	public static MenuPizza mp = new MenuPizza("");
+	public static MenuBurrito mb = new MenuBurrito("");
+	public static Menu todos = new Menu("Menu");
 	
 	/**
 	 * Metodo que asigna varios alimentos en los menus
@@ -75,11 +78,15 @@ public class Valores {
 			"s burritos","Gorra","Rosa","Tela",50)));
 		mb.agregar(new AdaptadorMenuItem(new Mercancia("Playera de com" +
 			"ensal distinguido","Playera","Cafe","Tela",120)));
+	
+		todos.agregar(mh);
+		todos.agregar(mp);
+		todos.agregar(mb);
 	}
 	
 	/**
 	 * Crea un robot con los tres menus
 	 */
-	public static Robot robot = new Robot(mh,mp,mb);
+	public static Robot robot = new Robot(todos);
 	
 }

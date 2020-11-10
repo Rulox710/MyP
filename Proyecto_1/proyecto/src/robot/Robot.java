@@ -5,10 +5,10 @@ import utilidad.Impresor;
 import utilidad.Escritor;
 import robot.estados.EstadosRobot;
 import robot.estados.Suspendido;
-import productos.menu.MenuItem;
-import menu.burrito.MenuBurrito;
-import menu.hamburguesa.MenuHamburguesa;
-import menu.pizza.MenuPizza;
+import menu.MenuComponente;
+import menu.menus.burrito.MenuBurrito;
+import menu.menus.hamburguesa.MenuHamburguesa;
+import menu.menus.pizza.MenuPizza;
 
 /**
  * Clase que modela a un robot de McBurgesas
@@ -20,13 +20,11 @@ public class Robot {
 	 */
 	private EstadosRobot estado;
 	
-	private MenuItem platillo;
+	private int nPlatillo = -1;
 	
-	private boolean ordenLista;
+	private MenuComponente platillo;
 	
-	private MenuHamburguesa mh;
-	private MenuPizza mp;
-	private MenuBurrito mb;
+	private MenuComponente mc;
 	
 	/**
 	 * Contructor de la clase
@@ -34,16 +32,13 @@ public class Robot {
 	 * @param mp Un menu de pizzas
 	 * @param mb Un menu de burritos
 	 */
-	public Robot(MenuHamburguesa mh, MenuPizza mp, MenuBurrito mb) {
+	public Robot(MenuComponente mc) {
 		estado = new Suspendido(this);
-		this.mh = mh;
-		this.mp = mp;
-		this.mb = mb;
-		ordenLista = false;
+		this.mc = mc;
 	}
 	
 	/**
-	 * Metodo paara cambiar el <code>EstadosRobot</code> actual
+	 * Metodo para cambiar el <code>EstadosRobot</code> actual
 	 * @param er El nuevo <code>EstadosRobot</code>
 	 */
 	public void cambiarEstado(EstadosRobot er) {
@@ -58,45 +53,8 @@ public class Robot {
 	 * menus mas uno
 	 */
 	public int imprimirMenu() {
-		Iterator<MenuItem> mh = this.mh.obtenerIterador();
-		Iterator<MenuItem> mp = this.mp.obtenerIterador();
-		Iterator<MenuItem> mb = this.mb.obtenerIterador();
-		int i = 1;
-		String str = " * Menu de Hamburguesas \n";
-		while(mh.hasNext()) {
-			MenuItem mi = mh.next();
-			str += "(" + i + ")" + mi.obtenerNombre() + ": " + 
-			mi.obtenerDescripcion() + " de costo " + mi.obtenerCosto() + 
-			" pesos. ";
-			str += (mi.obtenerEsVegetariano())? "Es vegetariano":"No es veget" +
-			"ariano";
-			str += "\n"; 
-			i++;
-		}
-		str += "\n * Menu de Pizzas \n";
-		while(mp.hasNext()) {
-			MenuItem mi = mp.next();
-			str += "(" + i + ")" + mi.obtenerNombre() + ": " + 
-			mi.obtenerDescripcion() + " de costo " + mi.obtenerCosto() + 
-				" pesos. ";
-			str += (mi.obtenerEsVegetariano())? "Es vegetariano":"No es veget" +
-				"ariano";
-			i++;
-			str += "\n";
-		}
-		str += "\n * Menu de Burritos \n";
-		while(mb.hasNext()) {
-			MenuItem mi = mb.next();
-			str += "(" + i + ")" + mi.obtenerNombre() + ": " + 
-			mi.obtenerDescripcion() + " de costo " + mi.obtenerCosto() + 
-			" pesos. ";
-			str += (mi.obtenerEsVegetariano())? "Es vegetariano":"No es veget" +
-				"ariano";
-			i++;
-			str += "\n";
-		}
-		Impresor.imprimir(str + "*\t*\t*\t*\n");
-		return i;
+		System.out.println(mc.toString());
+		return mc.tamanio();
 	}
 	
 	/**
@@ -104,82 +62,40 @@ public class Robot {
 	 * <code>MenuHamburguesa</code>
 	 * @return Un <code>Iterator</code>
 	 */
-	public Iterator<MenuItem> obtenerMenuHamburguesa() {
-		return mh.obtenerIterador();
+	public Iterator<MenuComponente> obtenerIteradorMenu() {
+		return mc.obtenerIterador();
 	}
 	
 	/**
-	 * Metodo pata obtener el <code>Iterator</code> de 
-	 * <code>MenuPizza</code>
-	 * @return Un <code>Iterator</code>
-	 */
-	public Iterator<MenuItem> obtenerMenuPizza() {
-		return mp.obtenerIterador();
-	}
-	
-	/**
-	 * Metodo pata obtener el <code>Iterator</code> de 
-	 * <code>MenuBurrito</code>
-	 * @return Un <code>Iterator</code>
-	 */
-	public Iterator<MenuItem> obtenerMenuBurrito() {
-		return mb.obtenerIterador();
-	}
-	
-	/**
-	 * Obtiene el numero de elementos en el menu de hamburguesas
+	 * Metodo para obtener el numero que representa al platillo a cocinar
 	 * @return Un entero
 	 */
-	public int obtenerTamanioHamburguesa() {
-		return mh.obtenerElementos();
+	public int obtenerNumeroPlatillo() {
+		return nPlatillo;
 	}
 	
 	/**
-	 * Obtiene el numero de elementos en el menu de pizzas
-	 * @return Un entero
-	 */
-	public int obtenerTamanioPizza() {
-		return mp.obtenerElementos();
-	}
-	
-	/**
-	 * Obtiene el numero de elementos en el menu de burritos
-	 * @return Un entero
-	 */
-	public int obtenerTamanioBurrito() {
-		return mb.obtenerElementos();
-	}
-	
-	/**
-	 * Metodo para obtener el platillo a cocinar
+	 * Metodo para obtener el platillo hecho, luego lo entrega
 	 * @return Un <code>MenuItem</code>
 	 */
-	public MenuItem obtenerPlatillo() {
+	public MenuComponente obtenerPlatillo() {
 		return platillo;
 	}
 	
 	/**
 	 * Metodo para asignar un platillo a cocinar
-	 * @param platillo Un platillo a preparar
+	 * @param nPlatillo Un entero que representa el platillo a preparar
 	 */
-	public void asignarPlatillo(MenuItem platillo) {
+	public void asignarNumeroPlatillo(int nPlatillo) {
+		this.nPlatillo = nPlatillo;
+	}
+	
+	/**
+	 * Metodo para asignar un platillo a cocinar
+	 * @param platillo Un <code>MenuComponente</code> que es el platillo listo
+	 */
+	public void asignarPlatillo(MenuComponente platillo) {
 		this.platillo = platillo;
-	}
-	
-	/**
-	 * Metodo que obtiene si la orden esta lista o no
-	 * @return <code>true</code> si esta lista, <code>false</code> si no
-	 */
-	public boolean obtenerOrdenLista() {
-		return ordenLista;
-	}
-	
-	/**
-	 * Asigan un valor boleano que indica si la orden esta lista
-	 * @param ordenLista Un booleano
-	 */
-	public void asignarOrdenLista(boolean ordenLista) {
-		this.ordenLista = ordenLista;
 	}
 	
 	/**
