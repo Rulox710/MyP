@@ -21,7 +21,8 @@ public class CocinarBurrito implements Cocinar {
 	
 	/**
 	 * Contrucctor de la clase
-	 * @param platillo Un <code>MenuItem</code> 
+	 * @param robot Un <code>Robot</code>
+	 * @param platillo Un <code>MenuComponente</code> 
 	 */
 	public CocinarBurrito(Robot robot, MenuComponente platillo) {
 		this.robot = robot;

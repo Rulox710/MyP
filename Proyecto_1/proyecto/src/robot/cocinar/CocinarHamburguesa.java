@@ -22,7 +22,7 @@ public class CocinarHamburguesa implements Cocinar {
 	/**
 	 * Contrucctor de la clase
 	 * @param robot Un <code>Robot</code>
-	 * @param platillo Un <code>MenuItem</code> 
+	 * @param platillo Un <code>MenuComponente</code> 
 	 */
 	public CocinarHamburguesa(Robot robot, MenuComponente platillo) {
 		this.robot = robot;

@@ -1,8 +1,10 @@
 main
 menu
-menu.burrito
-menu.hamburguesa
-menu.pizza
+menu.iteradores
+menu.menus
+menu.menus.burrito
+menu.menus.hamburguesa
+menu.menus.pizza
 productos
 productos.menu
 productos.menu.burrito

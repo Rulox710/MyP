@@ -41,7 +41,7 @@ public abstract class MenuItem extends MenuComponente {
 	
 	/**
 	 * Contructor de la clase para las mercancias
-	 * @param mercacnia Un objeto que no es comida
+	 * @param mercancia Un objeto que no es comida
 	 */
 	public MenuItem(Mercancia mercancia) {
 		this.nombre = mercancia.obtenerNombre();;

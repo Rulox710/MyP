@@ -31,6 +31,7 @@ public class Menu extends MenuComponente {
 	 * algu´n tipo de menu no es agregado
 	 * @return <code>true</code> si es agregado, <code>false</code> si no
 	 */
+	@Override
 	public boolean agregar(MenuComponente item) {
 		if (item instanceof MenuBurrito || item instanceof MenuHamburguesa || 
 			item instanceof MenuPizza) {
@@ -40,14 +41,6 @@ public class Menu extends MenuComponente {
 	}
 	
 	/**
-	 * Metodo que devuelve la cantidad de elementos en el <code>Menu</code>
-	 * @return Un entero
-	 */
-	public MenuComponente obtenerElemento(int i) {
-		return menu.get(i);
-	}
-	
-		/**
 	 * Metodo para obtener el nombre del menu
 	 * @return String
 	 */
@@ -56,6 +49,11 @@ public class Menu extends MenuComponente {
 		return nombre;
 	}
 	
+	/**
+	 * Metodo para obtener la cantidad de componentes en el menu
+	 * @return Un entero
+	 */
+	@Override
 	public int tamanio() {
 		int num = 0;
 		for(MenuComponente mc: menu) {
@@ -82,6 +80,7 @@ public class Menu extends MenuComponente {
 	 * Metodo para obtener un iterador del menu
 	 * @return <code>Iterator</code> del menu
 	 */
+	@Override
 	public Iterator<MenuComponente> obtenerIterador() {
 		return new IteradorCompuesto(menu.iterator());
 	}

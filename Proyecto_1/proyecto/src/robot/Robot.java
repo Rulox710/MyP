@@ -28,9 +28,8 @@ public class Robot {
 	
 	/**
 	 * Contructor de la clase
-	 * @param mh Un menu de hamburguesas
-	 * @param mp Un menu de pizzas
-	 * @param mb Un menu de burritos
+	 * @param mc Un componente del menu. Debe se un <code>Menu</code> de 
+	 * preferencia
 	 */
 	public Robot(MenuComponente mc) {
 		estado = new Suspendido(this);
