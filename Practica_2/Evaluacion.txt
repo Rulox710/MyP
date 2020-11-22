@@ -1,0 +1,5 @@
+Se calificó con 95 de 100
+
+Problema: Fue muy ambigua la descripcion tanto de State (con strategy) y la de Template.
+
+Notas: Las flechas de cambio de estado no son correctas del todo.
