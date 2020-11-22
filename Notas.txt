@@ -1,3 +1,6 @@
+Comandos para compilar desde terminal y una forma rápida para crear la documentación
+si se usa UNIX
+
 javadoc `find . -name *.java`
 javac -d bin -cp src src/...
 java -cp bin main/...
