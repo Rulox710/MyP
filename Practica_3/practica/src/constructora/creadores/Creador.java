@@ -251,4 +251,15 @@ public class Creador {
 			}
 		return null;
 	}
+	
+	/**
+	 * Metodo que reinicia al <code>Creador</code>
+	 */
+	public void reiniciar() {
+		llantas = null;
+		motor = null;
+		carroceria = null;
+		blindaje = null;
+		armas = null;
+	}
 }

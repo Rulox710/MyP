@@ -55,11 +55,13 @@ public class Principal {
 			}
 		}
 		Cliente cliente = new Cliente(numero);
-		Director director = new Director(new Creador(cliente));
+		Creador creador = new Creador(cliente);
+		Director director = new Director(creador);
 		Coche coche = null;
 		verdad = true;
 		numero = 0;
 		while(verdad) {
+		creador.reiniciar();
 		Impresor.imprimir("\u00BFQue quiere hacer?(Escriba el numero)\n(1)Com" +
 			"prar un coche a mi gusto\n(2)Comprar un coche, tomando como mold" +
 			"e un tanque\n(3)Comprar un coche, tomando como molde uno deporti" +
@@ -71,33 +73,34 @@ public class Principal {
 			}
 			switch(numero) {
 				case 1:
-					coche = director.crearNuevo();
+					director.crearNuevo();
 					try {
-						Impresor.imprimirExtra(coche.toString());
+						Impresor.imprimirExtra(creador.obtenerCoche().toString());
 					} catch(NullPointerException e) {
 						Impresor.imprimirExtra("Su coche no pudo ser construido");
 					}
 					break;
 				case 2:
-					coche = director.crearTanque();
+					director.crearTanque();
 					try {
-						Impresor.imprimirExtra(coche.toString());
+						Impresor.imprimirExtra(creador.obtenerCoche().toString());
 					} catch(NullPointerException e) {
 						Impresor.imprimirExtra("Su coche no pudo ser construido");
 					}
 					break;
 				case 3:
-					coche = director.crearDeportivo();
+					director.crearDeportivo();
 					try {
-						Impresor.imprimirExtra(coche.toString());
+						Impresor.imprimirExtra(creador.obtenerCoche().toString());
 					} catch(NullPointerException e) {
 						Impresor.imprimirExtra("Su coche no pudo ser construido");
 					}
+					
 					break;
 				case 4:
-					coche = director.crearEconomico();
+					director.crearEconomico();
 					try {
-						Impresor.imprimirExtra(coche.toString());
+						Impresor.imprimirExtra(creador.obtenerCoche().toString());
 					} catch(NullPointerException e) {
 						Impresor.imprimirExtra("Su coche no pudo ser construido");
 					}

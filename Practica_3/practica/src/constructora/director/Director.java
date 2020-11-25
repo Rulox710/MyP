@@ -28,9 +28,8 @@ public class Director {
 	
 	/**
 	 * Metodo para crear un coche desde cero
-	 * @return Un objeto tipo <code>Coche</code> que se creo
 	 */
-	public Coche crearNuevo() {
+	public void crearNuevo() {
 		boolean verdad = true;
 		while(verdad) {
 			Impresor.imprimirInfo(cc.descripcion());
@@ -47,81 +46,48 @@ public class Director {
 						"\" o \"no\", respectivamente");
 			}
 		}
-		return cc.obtenerCoche();
 	}
 	
 	/**
 	 * Metodo para crear un coche tomando como base lo que seria un tanque
-	 * @return Un objeto tipo <code>Coche</code> que se creo
 	 */
-	public Coche crearTanque() {
+	public void crearTanque() {
 		cc.asignarLlantas(new OrugaTanque());
 		cc.asignarMotor(new MotorDisel());
 		cc.asignarCarroceria(new CarroceriaCamion());
 		cc.asignarBlindaje(new Tanque());
 		cc.asignarArmas(new Caniones());
-		
-		boolean verdad = true;
-		while(verdad) {
-			Impresor.imprimirInfo(cc.descripcion());
-			Impresor.imprimir("\u00BFQuiere cambiar alguna parte?(S/N)");
-			switch(Escritor.leerCadena().toUpperCase()) {
-				case "S":
-					seleccionarPartes();
-					break;
-				case "N":
-					verdad = false;
-					break;
-				default:
-					Impresor.imprimirError("Escriba \"S\" o \"N\" para \"si" +
-						"\" o \"no\", respectivamente");
-			}
-		}
-		return cc.obtenerCoche();
+		tunear();
 	}
 	
 	/**
 	 * Metodo para crear un coche tomando como base lo que seria un coche 
 	 * deportivo
-	 * @return Un objeto tipo <code>Coche</code> que se creo
 	 */
-	public Coche crearDeportivo() {
+	public void crearDeportivo() {
 		cc.asignarLlantas(new LlantasDeportivas());
 		cc.asignarMotor(new MotorDeportivo());
 		cc.asignarCarroceria(new CarroceriaDeportiva());
 		cc.asignarBlindaje(new BlindajeSimple());
 		cc.asignarArmas(new Cierra());
 		
-		boolean verdad = true;
-		while(verdad) {
-			Impresor.imprimirInfo(cc.descripcion());
-			Impresor.imprimir("\u00BFQuiere cambiar alguna parte?(S/N)");
-			switch(Escritor.leerCadena().toUpperCase()) {
-				case "S":
-					seleccionarPartes();
-					break;
-				case "N":
-					verdad = false;
-					break;
-				default:
-					Impresor.imprimirError("Escriba \"S\" o \"N\" para \"si" +
-						"\" o \"no\", respectivamente");
-			}
-		}
-		return cc.obtenerCoche();
+		tunear();
 	}
 	
 	/**
 	 * Metodo para crear un coche tomando como modelo al coche mas economico
-	 * @return Un objeto tipo <code>Coche</code> que se creo
 	 */
-	public Coche crearEconomico() {
+	public void crearEconomico() {
 		cc.asignarLlantas(new LlantasSimples());
 		cc.asignarMotor(new MotorDisel());
 		cc.asignarCarroceria(new CarroceriaCasual());
 		cc.asignarBlindaje(new BlindajeSimple());
 		cc.asignarArmas(new Arpones());
 		
+		tunear();
+	}
+	
+	private void tunear() {
 		boolean verdad = true;
 		while(verdad) {
 			Impresor.imprimirInfo(cc.descripcion());
@@ -138,7 +104,6 @@ public class Director {
 						"\" o \"no\", respectivamente");
 			}
 		}
-		return cc.obtenerCoche();
 	}
 	
 	/**
