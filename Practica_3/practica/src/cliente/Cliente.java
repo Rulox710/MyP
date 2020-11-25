@@ -8,6 +8,7 @@ import constructora.coche.Coche;
 public class Cliente {
 	private int presupuesto; 
 	private ArrayList<Coche> comprados;
+	
 	/**
 	 * Constructor de la clase
 	 * @param presupuesto Un numero entero

@@ -11,8 +11,12 @@ import constructora.coche.partes.carroceria.*;
 import constructora.coche.partes.blindaje.*;
 import constructora.coche.partes.armas.*;
 
+/**
+ * Clase que modela las opciones para construir un <code>Coche</code> usando a
+ * un <code>Creador</code>
+ */
 public class Director {
-	Creador cc; 
+	private Creador cc; 
 
 	/**
 	 * Constructor de la clase
@@ -24,7 +28,7 @@ public class Director {
 	
 	/**
 	 * Metodo para crear un coche desde cero
-	 * @return Un objeto tipo <code>Coche<code> que se creo
+	 * @return Un objeto tipo <code>Coche</code> que se creo
 	 */
 	public Coche crearNuevo() {
 		boolean verdad = true;
@@ -48,7 +52,7 @@ public class Director {
 	
 	/**
 	 * Metodo para crear un coche tomando como base lo que seria un tanque
-	 * @return Un objeto tipo <code>Coche<code> que se creo
+	 * @return Un objeto tipo <code>Coche</code> que se creo
 	 */
 	public Coche crearTanque() {
 		cc.asignarLlantas(new OrugaTanque());
@@ -79,7 +83,7 @@ public class Director {
 	/**
 	 * Metodo para crear un coche tomando como base lo que seria un coche 
 	 * deportivo
-	 * @return Un objeto tipo <code>Coche<code> que se creo
+	 * @return Un objeto tipo <code>Coche</code> que se creo
 	 */
 	public Coche crearDeportivo() {
 		cc.asignarLlantas(new LlantasDeportivas());
@@ -109,7 +113,7 @@ public class Director {
 	
 	/**
 	 * Metodo para crear un coche tomando como modelo al coche mas economico
-	 * @return Un objeto tipo <code>Coche<code> que se creo
+	 * @return Un objeto tipo <code>Coche</code> que se creo
 	 */
 	public Coche crearEconomico() {
 		cc.asignarLlantas(new LlantasSimples());

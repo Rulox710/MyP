@@ -9,6 +9,9 @@ import constructora.coche.partes.carroceria.Carroceria;
 import constructora.coche.partes.blindaje.Blindaje;
 import constructora.coche.partes.armas.Armas;
 
+/**
+ * Clase que tiene los metododos para construir un <code>Coche</code>
+ */
 public class Creador {
 	private Llantas llantas;
 	private Motor motor;
@@ -74,7 +77,7 @@ public class Creador {
 	 * Metodo que asigna un tipo de <code>Llantas</code> al <code>Coche</code> a
 	 * crear
 	 * @param llantas Un objeto <code>Llantas</code> que tendra
-	 * @return Un boleano. <code>true>/code> si se pueden poner las 
+	 * @return Un boleano. <code>true</code> si se pueden poner las 
 	 * <code>Llantas</code>, <code>false</code> si no se pueden poner
 	 */
 	public boolean asignarLlantas(Llantas llantas) {
@@ -92,7 +95,7 @@ public class Creador {
 	 * Metodo que asigna un tipo de <code>Motor</code> al <code>Coche</code> a
 	 * crear
 	 * @param motor Un objeto <code>Motor</code> que tendra
-	 * @return Un boleano. <code>true>/code> si se puede poner el
+	 * @return Un boleano. <code>true</code> si se puede poner el
 	 * <code>Motor</code>, <code>false</code> si no se puede poner
 	 */
 	public boolean asignarMotor(Motor motor) {
@@ -110,7 +113,7 @@ public class Creador {
 	 * Metodo que asigna un tipo de <code>Carroceria</code> al 
 	 * <code>Coche</code> a crear
 	 * @param carroceria Un objeto <code>Carroceria</code> que tendra
-	 * @return Un boleano. <code>true>/code> si se puede poner la
+	 * @return Un boleano. <code>true</code> si se puede poner la
 	 * <code>Carroceria</code>, <code>false</code> si no se puede poner
 	 */
 	public boolean asignarCarroceria(Carroceria carroceria) {
@@ -127,8 +130,8 @@ public class Creador {
 	/**
 	 * Metodo que asigna un tipo de <code>Blindaje</code> al 
 	 * <code>Coche</code> a crear
-	 * @param carroceria Un objeto <code>Blindaje</code> que tendra
-	 * @return Un boleano. <code>true>/code> si se puede poner el
+	 * @param blindaje Un objeto <code>Blindaje</code> que tendra
+	 * @return Un boleano. <code>true</code> si se puede poner el
 	 * <code>Blindaje</code>, <code>false</code> si no se puede poner
 	 */
 	public boolean asignarBlindaje(Blindaje blindaje) {
@@ -146,7 +149,7 @@ public class Creador {
 	 * Metodo que asigna el tipo de <code>Armas</code> al 
 	 * <code>Coche</code> a crear
 	 * @param armas Un objeto <code>Armas</code> que tendra
-	 * @return Un boleano. <code>true>/code> si se pueden poner las
+	 * @return Un boleano. <code>true</code> si se pueden poner las
 	 * <code>Armas</code>, <code>false</code> si no se puede poner
 	 */
 	public boolean asignarArmas(Armas armas) {
