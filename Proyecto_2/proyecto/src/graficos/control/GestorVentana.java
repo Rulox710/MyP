@@ -28,7 +28,7 @@ public class GestorVentana {
 		ventanas[i].setVisible(true);
 	}
 	
-	public void enviarCadena(String cadena) {
-		logica.procesarCadena(cadena);
+	public boolean enviarCadena(String cadena) {
+		return logica.sePuedeProcesarCadena(cadena);
 	}
 }

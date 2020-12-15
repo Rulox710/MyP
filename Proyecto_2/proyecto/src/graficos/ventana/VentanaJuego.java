@@ -69,8 +69,7 @@ public class VentanaJuego extends Ventana {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == botonEnviar) {
 			String str = campo.getText();
-			boolean letras = Escritor.validarAlfabetico(str);
-			if(letras) {
+			if(gv.enviarCadena(str)){
 				escribirLento(textoInteractivo,str);
 				textoConsola.setText("");
 				campo.setText("");
