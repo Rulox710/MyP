@@ -1,5 +1,7 @@
 package graficos.modelo.palabras;
 
+import java.util.ArrayList;
+
 import utilidad.Escritor;
 
 /**
@@ -8,6 +10,7 @@ import utilidad.Escritor;
 public class Verbo implements Palabra {
 	
 	private String verbo;
+	private ArrayList<Palabra> relativas;
 	
 	/**
 	 * Constructor de la clase
@@ -15,6 +18,7 @@ public class Verbo implements Palabra {
 	 */
 	private Verbo(String verbo) {
 		this.verbo = verbo;
+		relativas = new ArrayList<>();
 	}
 	
 	/**
@@ -24,7 +28,8 @@ public class Verbo implements Palabra {
 	 */
 	public static Verbo nuevo(String verbo) throws PalabraException {
 		int n = verbo.length();
-		if(!Escritor.validarAlfabetico(verbo) || verbo.charAt(n - 1) != 'r') {
+		if(!Escritor.validarAlfabetico(verbo) || Character.toLowerCase(verbo.charAt(n - 1)) != 'r') {
+			System.out.print(verbo);
 			throw new PalabraException(1);
 		}
 		for(int i = 0; i < n; i++) {
@@ -33,6 +38,17 @@ public class Verbo implements Palabra {
 			}
 		}
 		return new Verbo(Escritor.limpiar(verbo).toLowerCase());
+	}
+	
+	@Override
+	public void asignarRelativas(Palabra p) {
+		relativas.add(p);
+	}
+	
+	@Override
+	public boolean esRelativa(Palabra p) {
+		for(Palabra pa: relativas)System.out.print(pa.obtenerCadena()+",");
+		return relativas.contains(p);
 	}
 	
 	@Override

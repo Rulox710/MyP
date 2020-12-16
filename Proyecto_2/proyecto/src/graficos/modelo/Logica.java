@@ -3,10 +3,11 @@ package graficos.modelo;
 import utilidad.Escritor;
 import utilidad.Impresor;
 import graficos.control.GestorVentana;
+import graficos.modelo.palabras.Palabra;
 import graficos.modelo.palabras.Verbo;
 import graficos.modelo.palabras.Sustantivo;
 import graficos.modelo.palabras.PalabraException;
-import graficos.modelo.palabras.diccionario.DiccionarioVerbos;
+import graficos.modelo.palabras.diccionario.Diccionario;
 
 /**
  * Clase que tiene las acciones que se podrán realizar en las diferentes 
@@ -15,11 +16,11 @@ import graficos.modelo.palabras.diccionario.DiccionarioVerbos;
 public class Logica {
 	
 	private GestorVentana gv;
-	private DiccionarioVerbos dv;
+	private Diccionario dv;
 	
 	public Logica(GestorVentana gv) {
 		this.gv = gv;
-		this.dv = new DiccionarioVerbos();
+		this.dv = new Diccionario();
 		dv.iniciar();
 	}
 	

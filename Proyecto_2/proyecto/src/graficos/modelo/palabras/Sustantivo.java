@@ -1,11 +1,15 @@
 package graficos.modelo.palabras;
 
+import java.util.ArrayList;
+
 import utilidad.Escritor;
 
 /**
  * Clase que modela un sustantivo
  */
 public class Sustantivo implements Palabra {
+	
+	private ArrayList<Palabra> relativas;
 	
 	private String sustantivo;
 	private String genero;
@@ -83,6 +87,16 @@ public class Sustantivo implements Palabra {
 	@Override
 	public String obtenerCadena() {
 		return sustantivo;
+	}
+	
+	@Override
+	public void asignarRelativas(Palabra p) {
+		relativas.add(p);
+	}
+	
+	@Override
+	public boolean esRelativa(Palabra p) {
+		return relativas.contains(p);
 	}
 	
 	@Override

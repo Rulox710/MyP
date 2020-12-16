@@ -9,10 +9,10 @@ public class GestorVentana {
 	private Logica logica;
 	
 	public GestorVentana() {
-		iniciarEstadosVentana();
+		iniciarVentanas();
 	}
 	
-	private void iniciarEstadosVentana() {
+	private void iniciarVentanas() {
 		ventanas = new Ventana[3];
 		ventanas[0] = new VentanaPrincipal(this);
 		ventanas[1] = new VentanaJuego(this);
