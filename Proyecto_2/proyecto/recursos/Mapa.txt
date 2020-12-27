@@ -1,0 +1,13 @@
+01:Cocina:E-02:
+02:Comedor:S-05,O-01:E-3
+03:Almacen de Herramientas:S-06:O-02
+04:Entrada:S-07,E-05:
+05:Antesala:N-02,S-08,E-06,O-04:
+06:Sala de Estar:N-03,O-05:S-09
+07:Biblioteca:N-04,E-08:
+08:Cuarto oscuro:N-05,S-10,E-09,O-07:
+09:Jardin:O-08:N-06
+10:Pasillo:N-08,S-012:
+11:Dormitorio:E-012:
+12:Cuarto de Pintura:N-10,E-13,O-11:
+13:Almacen de Pintura:O-12:

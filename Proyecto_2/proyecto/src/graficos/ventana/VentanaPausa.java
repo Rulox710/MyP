@@ -12,12 +12,17 @@ public class VentanaPausa extends Ventana {
 	
 	private JButton botonReanudar, botonSalir;
 	
+	/**
+	 * Construcctor de la clase. Inicia y coloca todos los objetos necesarios en
+	 * la ventana
+	 * @param gv El encargado de coordinar las ventanas y la logica
+	 */
 	public VentanaPausa(GestorVentana gv) {
 		super(gv);
 		
 		botonReanudar = new JButton();
 		botonReanudar.setBounds(75,25,100,25);
-		botonReanudar.setText("Continuar el juego");
+		botonReanudar.setText("Continuar");
 		
 		botonSalir = new JButton();
 		botonSalir.setBounds(285,25,100,25);
@@ -29,15 +34,18 @@ public class VentanaPausa extends Ventana {
 		add(botonSalir);
 	}
 	
+	/**
+	 * Metodo que recibe las aciones realizadas en la ventana
+	 * @param e El <code>ActionEvent</code> registrado
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == botonReanudar) {
+			cronometro.iniciarCronometro();
 			gv.mostrarVentana(1);
-			//gv.cambiarEstado(new EnJuego(gv));
 		}
 		if (e.getSource() == botonSalir) {
 			gv.mostrarVentana(0);
-			//gv.cambiarEstado(new Inicio(gv));
 		}
 	}
 }

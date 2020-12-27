@@ -18,6 +18,11 @@ public class VentanaJuego extends Ventana {
 	private JButton botonEnviar, botonPausa;
 	private JTextField campo;
 	
+	/**
+	 * Construcctor de la clase. Inicia y coloca todos los objetos necesarios en
+	 * la ventana
+	 * @param gv El encargado de coordinar las ventanas y la logica
+	 */
 	public VentanaJuego(GestorVentana gv) {
 		super(gv);
 		
@@ -33,7 +38,9 @@ public class VentanaJuego extends Ventana {
 		botonEnviar.setBounds(300, 280, 120, 25);
 		botonEnviar.setText("Enviar");
 		
-		textoIntroduccion = "nada aun\n\n\n\n\n\n\nCola";
+		textoIntroduccion = "Texto por defecto";
+		/*textoIntroduccion = "Despierto en este extra\u00F1o lugar. Sera mejor" +
+			" que lo investigue";*/
 		
 		textoInteractivo = new JTextArea();
 		textoInteractivo.setBounds(50, 90, 380, 110);//140
@@ -53,7 +60,7 @@ public class VentanaJuego extends Ventana {
 		//textoConsola.setEditable(false);
 		textoConsola.setFont(new java.awt.Font("Verdana", 0, 14));
 		textoConsola.setLineWrap(true);
-		textoConsola.setText(textoIntroduccion);
+		textoConsola.setText("Escriba ayuda si la necesita");
 		textoConsola.setWrapStyleWord(true);
 		
 		botonEnviar.addActionListener(this);
@@ -65,21 +72,32 @@ public class VentanaJuego extends Ventana {
 		add(campo);
 	}
 	
+	public void escribirEnJuego(String cadena) {
+		escribirLento(textoInteractivo,cadena);
+		textoConsola.setText(null);
+	}
+	
+	public void escribirEnConsola(String cadena) {
+		escribirLento(textoConsola,cadena);
+	}
+	
+	/**
+	 * Metodo que recibe las aciones realizadas en la ventana
+	 * @param e El <code>ActionEvent</code> registrado
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == botonEnviar) {
 			String str = campo.getText();
-			if(gv.enviarCadena(str)){
-				escribirLento(textoInteractivo,str);
-				textoConsola.setText("");
-				campo.setText("");
-			} else {
-				escribirLento(textoConsola,"No entiendo");
+			if(!escribiendo){
+				if(gv.procesarCadena(str)) {
+					campo.setText("");
+				}
 			}
 		}
 		if (e.getSource() == botonPausa) {
+			cronometro.pausarCronometro();
 			gv.mostrarVentana(2);
-			//gv.cambiarEstado(new EnPausa(gv));
 		}
 	}
 }
