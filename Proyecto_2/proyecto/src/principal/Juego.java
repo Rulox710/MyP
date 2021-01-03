@@ -32,10 +32,14 @@ public class Juego {
 	}
 	
 	public void accionarEnemigo() {
-		enemigo.cambiarCuarto("");
-		if(jugador.entesJuntos() == 2)
+		if(enemigo.hayOtroEnte()) {
+			enviarCadenaJuego(enemigo.atacar(false));
+		} else {
+			enemigo.cambiarCuarto("");
+			if(jugador.hayOtroEnte())
 			enviarCadenaJuego("Algo ha entrado al cuarto. Sera mejor que me v" +
 				"aya");
+		}
 	}
 	
 	private void prepararJuego() {

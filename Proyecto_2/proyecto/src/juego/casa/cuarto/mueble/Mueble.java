@@ -1,6 +1,7 @@
 package juego.casa.cuarto.mueble; 
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import juego.casa.cuarto.mueble.item.Item;
 import juego.casa.cuarto.mueble.item.Llave;
@@ -8,9 +9,10 @@ import juego.casa.cuarto.mueble.item.Llave;
 /**
  * Clase que modela un mueble
  */
-public abstract class Mueble {
+public class Mueble {
+	
 	/**
-	 * Clae interna que modela una cerradura para un <code>Mueble</code>
+	 * Clase interna que modela una cerradura para un <code>Mueble</code>
 	 */
 	protected class Cerradura {
 		private String clave;
@@ -38,6 +40,7 @@ public abstract class Mueble {
 		 * @return <code>true</code> si se abrio, <code>false</code> si no
 		 */
 		public boolean abrirCerradura(Llave llave) {
+			if(llave == null) return false;
 			if(llave.obtenerClave().equals(clave)) {
 				estaAbierta = true;
 			}
@@ -45,18 +48,30 @@ public abstract class Mueble {
 		}
 	}
 	
-	protected String nombre, descripcion;
-	protected Cerradura cerradura;
-	protected ArrayList<Item> contenido;
+	private String nombre, descripcion;
+	private Cerradura cerradura;
+	private ArrayList<Item> contenido = new ArrayList<>();
 	
 	/**
 	 * Contructor de la clase
 	 * @param nombre Una cadena que identificara al <code>Mueble</code>
 	 * @param descripcion Una cadena que describe al <code>Mueble</code>
 	 */
-	public Mueble(String nombre, String descripcion) {
+	public Mueble(String nombre) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
+	}
+	
+	/**
+	 * Contructor de la clase
+	 * @param nombre Una cadena que identificara al <code>Mueble</code>
+	 * @param descripcion Una cadena que describe al <code>Mueble</code>
+	 * @param clave La clave de la cerradura
+	 */
+	public Mueble(String nombre, String clave) {
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		cerradura = new Cerradura(clave);
 	}
 	
 	/**
@@ -76,37 +91,14 @@ public abstract class Mueble {
 	}
 	
 	/**
-	 * Metodo que indica si tiene o no <code>Cerradura</code>, la cual impide 
-	 * que se vea el contenido del <code>Mueble</code>
-	 * @return Un boleano  
-	 */
-	private boolean tieneCerradura() {
-		return (cerradura != null);
-	}
-	
-	/**
-	 * Metodo para obtener una cadena con el contenido del <code>Mueble</code>
-	 * @return Una cadena
-	 */
-	private String listarContenido() {
-		String cadena = "";
-		int i = 0;
-		for(Item item: contenido) {
-			if(item == null) {
-				cadena = "Esta vacio";
-			}
-			if(i > 0) cadena += ", ";
-			cadena += item.obtenerNombre();
-			i++;
-		}
-		return cadena;
-	}
-	
-	/**
 	 * Metodo para saber si es un mueble que se puede abrir
 	 * @return Un boleano
 	 */
-	public abstract boolean sePuedeAbrir();
+	private boolean sePuedeAbrir() {
+		if(cerradura != null)
+			return cerradura.obtenerEstaAbierta();
+		return true;
+	}
 	
 	/**
 	 * Metodo para abrir un <code>Mueble</code>
@@ -115,17 +107,12 @@ public abstract class Mueble {
 	 */
 	public String abrir() {
 		String cadena = "";
-		if(tieneCerradura()) {
-			if(cerradura.obtenerEstaAbierta()){
-				cadena += "Este " + nombre.toLowerCase() + " tiene: " + 
-					listarContenido().toLowerCase();
-			} else {
-				cadena += "Necesitare de una llave para abrir este " + 
-					nombre.toLowerCase();
-			}
-		} else {
+		if(sePuedeAbrir()) {
 			cadena += "Este " + nombre.toLowerCase() + " tiene: " + 
-				listarContenido().toLowerCase();
+				listarContenido();
+		} else {
+			cadena += "Necesitare de una llave para abrir este " + 
+				nombre.toLowerCase();
 		}
 		return cadena;
 	}
@@ -138,29 +125,76 @@ public abstract class Mueble {
 	 */
 	public String abrir(Llave llave) {
 		String cadena = "";
-		if(tieneCerradura()) {
-			if(cerradura.obtenerEstaAbierta()) {
+		if(sePuedeAbrir()) {
+			if(cerradura != null) {
 				cadena += "Ya habia abierto este " +  nombre.toLowerCase() + 
-				". Tiene: " + listarContenido().toLowerCase();
+					". Tiene: " + listarContenido();
 			} else {
-				if(cerradura.abrirCerradura(llave)) {
-					cadena += "Se ha abierto este " + nombre.toLowerCase() +
-						". Tiene: " + listarContenido().toLowerCase();
-				} else {
-					cadena += "No parece ser la llave correcta";
-				}
+				cadena += "No necesito de una llave para abrir este " + 
+				nombre.toLowerCase() + ". Tiene: " + listarContenido();
 			}
+				cadena += "No parece ser la llave correcta";
 		} else {
-			cadena += "No necesito de una llave para abrir este " + 
-				nombre.toLowerCase() + ". Tiene: " + 
-				listarContenido().toLowerCase();
+			if(cerradura.abrirCerradura(llave)) {
+				cadena = "He abierto el " + nombre.toLowerCase();
+			} else {
+				cadena = "No parece ser la lleve correcta";
+			}
 		}
 		return cadena;
 	}
 	
-	/**
-	 * Metodo para ver si tiene contenido o no
-	 * @return Un boleanos
-	 */
-	public abstract boolean tieneContenido();
+	public String verContenido() {
+		String cadena = "";
+		if(sePuedeAbrir()) {
+			cadena = "Este " + nombre.toLowerCase() + "tiene: " + 
+				listarContenido();
+		} else {
+			cadena = "Esta cerrado y no puedo ver su contenido";
+		}
+		return cadena;
+	}
+	
+	private String listarContenido() {
+		String cadena = "";
+		if(!contenido.isEmpty()) {
+			Iterator<Item> it = contenido.iterator();
+			while(it.hasNext()) {
+				cadena += it.next().toString().toLowerCase();
+				if(it.hasNext()) cadena += ", ";
+			}
+		} else {
+			cadena = "nada";
+		}
+		return cadena;
+	}
+	
+	public Object[] tomarObjeto(String objeto) {
+		Object[] regreso = new Object[2];
+		String cadena = "No encuentro ningun objeto como ese aqui";
+		Item item = null;
+		if(!sePuedeAbrir()) {
+			cadena = "No puedo abrir este mueble";
+		} else if(!contenido.isEmpty()) {
+			Iterator<Item> it = contenido.iterator();
+			while(it.hasNext()) {
+				Item temp = it.next();
+				if(temp.equals(objeto)){
+					cadena = "He tomado: " + objeto.toLowerCase();
+					item = temp;
+					break;
+				}
+			}
+		} else {
+			cadena = "No habia nada para tomar";
+		}
+		contenido.remove(item);
+		regreso[0] = item;
+		regreso[1] = cadena;
+		return regreso;
+	}
+	
+	public void agregarObjeto(Item item) {
+		if(item != null) contenido.add(item);
+	}
 }

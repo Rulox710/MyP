@@ -9,11 +9,15 @@ import java.util.StringTokenizer;
 
 import juego.comandosValidos.comandos.Comando;
 import juego.casa.cuarto.Cuarto;
+import juego.casa.cuarto.mueble.Mueble;
+import juego.casa.cuarto.mueble.item.*;
 
 public class LectorRecursos {
 	
 	private ArrayList<Comando> comandosValidos = new ArrayList<>();
 	private ArrayList<Cuarto> casa = new ArrayList<>();
+	private ArrayList<Mueble> muebles = new ArrayList<>();
+	private ArrayList<Item> items = new ArrayList<>();
 	   
     private String separador = System.getProperty("file.separator");
 	
@@ -49,6 +53,32 @@ public class LectorRecursos {
 			in = new Scanner(new File("recursos" + separador + "Mapa.txt"));
 			while(in.hasNext()){
 				conectarCuartos(in.nextLine());
+			}
+			in.close();
+		} catch(FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			Scanner in = new Scanner(new File("recursos" + separador + "Items.txt")); 
+			int clave = 0;
+			while(in.hasNext()) {
+				String str = in.nextLine();
+				if(str.equals(">")) {
+					clave++;
+				} else {
+					iniciarItems(str,clave);
+				}
+			}
+			in.close();
+		} catch(FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			Scanner in = new Scanner(new File("recursos" + separador + "Muebles.txt")); 
+			while(in.hasNext()) {
+				iniciarMuebles(in.nextLine());
 			}
 			in.close();
 		} catch(FileNotFoundException e) {
@@ -98,6 +128,53 @@ public class LectorRecursos {
 					asignar.asignarSalidaI(dir[0].charAt(0),casa.get(Integer.parseInt(dir[1])-1));
 				} catch(Exception e) {}
 			}
+		}
+	}
+	
+	private void iniciarMuebles(String mueble) {
+		Mueble m = null;
+		String[] str = mueble.split(">");
+
+		String[] creador = str[0].split(",");
+		if(creador.length == 1) {
+			m = new Mueble(creador[0]);
+		} else {
+			m = new Mueble(creador[0],creador[1]);
+		}
+		if(str.length == 2) {
+			String[] lista = str[1].split(",");
+			for(String s: lista) {
+				m.agregarObjeto(items.get(Integer.parseInt(s)-1));
+			}
+		}
+	}
+	
+	private void iniciarItems(String item, int clave) {
+		String[] str= item.split(":");
+		switch(clave) {
+			case 1:
+			Consumible c = new Consumible(Integer.parseInt(str[0]),str[1],str[2]);
+			c.asignarCura(Integer.parseInt(str[3]));
+			items.add(c);
+			System.out.println(c);
+			break;
+			case 3:
+			Llave l = new Llave(Integer.parseInt(str[0]),str[1],str[2]);
+			if(str.length == 4) l.asignarClave(str[3]);
+			items.add(l);
+			System.out.println(l);
+			break;
+			case 2:
+			Herramienta h = new Herramienta(Integer.parseInt(str[0]),str[1],str[2]);
+			h.asignarDanio(Integer.parseInt(str[3]));
+			items.add(h);
+			System.out.println(h);
+			break;
+			case 4:
+			Nota n = new Nota(Integer.parseInt(str[0]),str[1],str[2]);
+			items.add(n);
+			System.out.println(n);
+			break;
 		}
 	}
 }

@@ -1,12 +1,12 @@
 ayuda<comandos
 inventario<
 vida<
-regrersar<
+regresar<
 ir<caminar
 comer<ingerir
 incendiar<quemar,prender
 leer<
-observar<ver,mirar
+observar<ver,mirar,contemplar
 entrar<
 girar<
-pelear<golpear
+pelear<golpear,atacar

@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 import juego.ente.Ente;
+import juego.ente.jugador.Jugador;
+import juego.ente.enemigo.Enemigo;
 import juego.casa.cuarto.mueble.Mueble;
 
 public class Cuarto {
@@ -14,7 +16,7 @@ public class Cuarto {
 	private Hashtable<String,Cuarto> salidasV = new Hashtable<>();
 	private Hashtable<String,Cuarto> salidasI = new Hashtable<>();
 	private Mueble mueble;
-	private int entes = 0;
+	private Ente[] entes = new Ente[2];
 	
 	public Cuarto(String id, String nombre, String descripcion) {
 		this.id = id;
@@ -22,16 +24,20 @@ public class Cuarto {
 		this.descripcion = descripcion;
 	}
 	
-	public void agregarEnte() {
-		entes++;
+	public void agregarEnte(Ente ente) {
+		if(ente instanceof Jugador) entes[0] = ente;
+		if(ente instanceof Enemigo) entes[1] = ente;
 	}
 	
-	public void retirarEnte() {
-		entes--;
+	public void retirarEnte(Ente ente) {
+		if(ente instanceof Jugador) entes[0] = null;
+		if(ente instanceof Enemigo) entes[1] = null;
 	}
 	
-	public int entesPresentes() {
-		return entes;
+	public Ente obtenerEnteAjeno(Ente ente) {
+		if(ente instanceof Jugador) return entes[1];
+		if(ente instanceof Enemigo) return entes[0];
+		return null;
 	}
 	
 	public void asignarSalidaV(char direccion, Cuarto r) throws Exception {

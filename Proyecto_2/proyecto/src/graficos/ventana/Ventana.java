@@ -61,7 +61,7 @@ public abstract class Ventana extends JFrame implements ActionListener {
 									componente.append(""+l);
 								}
 							});
-							sleep(50);
+							sleep(20);
 						} catch (InterruptedException ex) {
 							ex.printStackTrace();
 					} catch (InvocationTargetException ex) {

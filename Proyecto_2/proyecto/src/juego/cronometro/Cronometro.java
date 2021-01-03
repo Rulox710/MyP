@@ -53,7 +53,7 @@ public final class Cronometro extends Thread{
 				while(enFuncionamiento) {
 					Thread.sleep(1000);
 					x++;
-					if(x == 50) {
+					if(x == 30) {
 						notificarJuego();
 						x = 0;
 					}

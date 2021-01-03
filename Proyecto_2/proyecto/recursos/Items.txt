@@ -1,0 +1,24 @@
+>
+01:Planta verde:Una planta de un color verde intenso:1
+02:Planta roja:Una planta de u color rojo carmesi:0
+03:Mezcla amarillente:El resultado de mezclar una planta planta roja con una verde:3
+04:Mezcla verdoza:El resultado de mezclar dos plantas verdes:2
+05:Mezcla rojiza:El resultado de mezclar dos planas rojas:-1
+>
+06:Palo viejo:Un palo de madera desgastado:2
+07:Lanza oxidada:Una lanza con filo suficiente para ser peligrosa:4
+>
+08:Fragmento de llave roja:Parece que si junto dos de estas, tendré la llave completa
+09:Llave roja:Una llave pintada de rojo:1AZ9
+10:Fragmento de llave negra:Parece que si junto tres de estas, tendré la llave completa:
+11:Llave negra incompleta:Falta un fragmento mas para completar la llave
+12:Llave negra:Una llave negra con una figura intrincada que no distingo:2BY8
+13:Llave corazon:Una llave con un corazon grabado en ella:3CX7
+14:Llave de picas:Una llave con una picas grabada en ella:4DW6
+15:Llave de la entrada:Parece que puede abrir la puerta para que pueda salir 
+>
+16:Libro de plantas:Dice algo sobre los beneficios de mezclar plantas rojas y verdes. Parecen ser plantas curativas. Dice tambien que, por ejemplo, dos verdes da un efecto mayor que una sola
+17:Nota olvidada:"Oculte la llave de la puerta principal. Si mi marido llegase a herirme de alguna forma grave, yo tengo la unica forma de salir de la casa oculta aqui"
+18:Nota paranoica:"Mi querida se ha comportado extrano ultimamente, temo por mi vida. Tal vez deberia..."
+19:Periodico viejo:"Las personas infectadas en la pandemia del han perdido la cabeza..." El resto esta razgado y no puedo leerlo bien
+20:Nota culpable:"Use la lanza que usaba en su ultima pintura... Cada vez que la veo solo pienso en... comer" A partir de aqui todo es incomprensible

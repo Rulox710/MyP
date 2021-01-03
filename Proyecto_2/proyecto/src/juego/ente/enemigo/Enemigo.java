@@ -13,7 +13,7 @@ public class Enemigo extends Ente{
 	public Enemigo(Cuarto cuarto) {
 		super(cuarto);
 		vida = 5;
-		ataque = 3;
+		ataque = 0;
 	}
 	
 	public String obtenerVida() {
@@ -23,6 +23,20 @@ public class Enemigo extends Ente{
 			return "Parece muerta, pero se mueve un poco. Sera mejor que me v" +
 				"aya";
 		}
+	}
+	
+	public String atacar(boolean contraataque) {
+		if(muerto()) return "";
+		String str = "";
+		Ente jugador = ubicacion.obtenerEnteAjeno(this);
+		if(jugador != null) {
+			if(jugador.muerto()) return "Fin del juego";
+			str += jugador.recibirDanio(ataque, contraataque);
+			if(jugador.muerto()) {
+				str += "Fin del juego";
+			}
+		}
+		return str;
 	}
 	
 	public String cambiarCuarto(String str) {
@@ -35,9 +49,9 @@ public class Enemigo extends Ente{
 			case 'E': ubicacionAnterior = "oeste"; break;
 			case 'O': ubicacionAnterior = "este"; break;
 		}
-		ubicacion.retirarEnte();
+		ubicacion.retirarEnte(this);
 		ubicacion = cuarto;
-		ubicacion.agregarEnte();
+		ubicacion.agregarEnte(this);
 		return "";
 	}
 	

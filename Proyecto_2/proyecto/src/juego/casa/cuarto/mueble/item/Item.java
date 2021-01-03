@@ -2,9 +2,8 @@ package juego.casa.cuarto.mueble.item;
 
 public abstract class Item {
 	
-	private String nombre, descripcion;
-	private boolean tomado = false;
-	private int id;
+	protected String nombre, descripcion;
+	protected int id;
 	
 	/**
 	 * Constructor de a clase
@@ -40,7 +39,14 @@ public abstract class Item {
 	public boolean equals(Object obj) {
 		if(obj instanceof Item) {
 			return (((Item)obj).id == this.id);
+		} else if(obj instanceof String) {
+			return ((String)obj).equals(this.nombre);
 		}
 		return false;
+	}
+	
+	@Override
+	public String toString() {
+		return nombre;
 	}
 }

@@ -64,10 +64,11 @@ public class Logica {
 				}
 			} else if(comandosValidos.get(3).igual(str[0])) {//regresar
 				String tem = "";
-				if(str.length == 4) {
-					tem = str[1] + str[2] + str[3];
+				System.out.print("holiwis");
+				switch(str.length) {
+					case 4: tem = str[1] + str[2] + str[3]; break;
 				}
-				if(tem.equalsIgnoreCase("alCuartoAnterior") || str.length == 1) {
+				if(tem.equalsIgnoreCase("alCuartoAnterior") || tem.equals("")) {
 					resultado = jugador.regresar();
 				} else {
 					cc = "b";
@@ -75,10 +76,9 @@ public class Logica {
 			} else if(comandosValidos.get(4).igual(str[0])) {//ir
 				boolean direccion = false;
 				String tem = "";
-				if(str.length == 3) {
-					tem = str[1];
-				} else if(str.length == 4) {
-					tem = str[1] + str[2];
+				switch(str.length) {
+					case 3: tem = str[1]; break;
+					case 4: tem = str[1] + str[2]; break;
 				}
 				if(tem.equalsIgnoreCase("al") || tem.equalsIgnoreCase("haciaEl")) {
 					resultado = jugador.cambiarCuarto(str[str.length-1]);
@@ -93,12 +93,13 @@ public class Logica {
 				
 			} else if(comandosValidos.get(8).igual(str[0])) {//observar
 				String tem = "";
-				if(str.length == 2) {
-					tem = str[1];
-				} else if(str.length == 3) {
-					tem = str[1] + str[2];
+				String fin = "";
+				switch(str.length) {
+					case 2: fin = str[1]; break;
+					case 3: tem = str[1]; fin = str[2]; break;
 				}
-				if(tem.equalsIgnoreCase("cuarto") || tem.equalsIgnoreCase("elCuarto")) {
+				boolean c = (fin.equals("") || fin.equalsIgnoreCase("cuarto"));
+				if(c && (tem.equals("") || tem.equalsIgnoreCase("el"))) {
 					resultado = jugador.describirCuarto();
 				} else {
 					cc = "b";
@@ -108,7 +109,27 @@ public class Logica {
 			} else if(comandosValidos.get(10).igual(str[0])) {//girar
 				
 			} else if(comandosValidos.get(11).igual(str[0])) {//pelear
-				
+				String tem = "";
+				String fin = "";
+				switch(str.length) {
+					case 2: fin = str[1]; break;
+					case 3: tem = str[1]; fin = str[2]; break;
+					case 4: tem = str[1] + str[2]; fin = str[3]; break;
+					case 5: tem = str[1] + str[2] + str[3]; fin = str[4]; break;
+				}
+				boolean m = (fin.equalsIgnoreCase("enemigo") || 
+					fin.equalsIgnoreCase("monstruo"));
+				if(tem.equals("") && (fin.equals("") || m)) {
+					resultado = jugador.atacar(false);
+				} else if(m && (tem.equalsIgnoreCase("al") ||
+					tem.equalsIgnoreCase("conEl") || 
+					tem.equalsIgnoreCase("aEse") || 
+					tem.equalsIgnoreCase("contraEl") || 
+					tem.equalsIgnoreCase("enContraDel"))) {
+					resultado = jugador.atacar(false);
+				} else {
+					cc = "b";
+				}
 			} 
 		} else {
 			cc = "b";
