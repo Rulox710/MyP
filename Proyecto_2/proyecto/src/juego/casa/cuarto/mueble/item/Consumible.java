@@ -15,4 +15,12 @@ public class Consumible extends Item {
 	public int obtenerCura(){
 		return cura;
 	}
+	
+	@Override
+	public boolean validarItemCadena(String cadena) {
+		if(!super.validarItemCadena(cadena)) {
+			return ((String)cadena).equalsIgnoreCase("consumible");
+		}
+		return true;
+	}
 }

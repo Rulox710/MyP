@@ -10,6 +10,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import utilidad.Escritor;
+import juego.cronometro.Cronometro;
 import graficos.control.GestorVentana;
 
 public class VentanaJuego extends Ventana {
@@ -89,14 +90,14 @@ public class VentanaJuego extends Ventana {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == botonEnviar) {
 			String str = campo.getText();
-			if(!escribiendo){
+			if(!escribiendoJuego){
 				if(gv.procesarCadena(str)) {
 					campo.setText("");
 				}
 			}
 		}
 		if (e.getSource() == botonPausa) {
-			cronometro.pausarCronometro();
+			Cronometro.instancia.pausarCronometro();
 			gv.mostrarVentana(2);
 		}
 	}

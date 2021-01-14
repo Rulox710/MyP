@@ -12,7 +12,6 @@ import javax.swing.SwingUtilities;
 
 import java.lang.Thread;
 
-import juego.cronometro.Cronometro;
 import graficos.control.GestorVentana;
 
 /**
@@ -23,8 +22,7 @@ public abstract class Ventana extends JFrame implements ActionListener {
 	public String textoIntroduccion = "";
 	
 	protected GestorVentana gv;
-	protected boolean escribiendo = false;
-	protected Cronometro cronometro = Cronometro.obtenerInstancia();
+	protected static boolean escribiendoJuego = false;
 	
 	/**
 	 * constructor de la clase donde se inicializan todos los componentes
@@ -51,7 +49,7 @@ public abstract class Ventana extends JFrame implements ActionListener {
 	protected void escribirLento(JTextArea componente, String cadena) {
 		new Thread() {
 			public void run() {
-				escribiendo = true;
+				escribiendoJuego = true;
 				componente.setText("");
 				char[] letras = cadena.toCharArray();
 				for (char l: letras) {
@@ -68,7 +66,7 @@ public abstract class Ventana extends JFrame implements ActionListener {
 						ex.printStackTrace();
 					}
 				}
-				escribiendo = false;
+				escribiendoJuego = false;
 			}
 		}.start();
 	}

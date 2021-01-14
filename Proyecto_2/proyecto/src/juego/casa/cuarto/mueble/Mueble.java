@@ -48,9 +48,10 @@ public class Mueble {
 		}
 	}
 	
-	private String nombre, descripcion;
+	private String nombre;
 	private Cerradura cerradura;
 	private ArrayList<Item> contenido = new ArrayList<>();
+	private boolean abierto;
 	
 	/**
 	 * Contructor de la clase
@@ -59,7 +60,7 @@ public class Mueble {
 	 */
 	public Mueble(String nombre) {
 		this.nombre = nombre;
-		this.descripcion = descripcion;
+		abierto = false;
 	}
 	
 	/**
@@ -70,8 +71,8 @@ public class Mueble {
 	 */
 	public Mueble(String nombre, String clave) {
 		this.nombre = nombre;
-		this.descripcion = descripcion;
 		cerradura = new Cerradura(clave);
+		abierto = false;
 	}
 	
 	/**
@@ -82,12 +83,8 @@ public class Mueble {
 		return nombre;
 	}
 	
-	/**
-	 * Metodo para obtener la descripcion
-	 * @return Una cadena que representa la descripcion
-	 */
-	public String obtenerDescripcion() {
-		return descripcion;
+	public boolean obtenerAbierto() {
+		return abierto;
 	}
 	
 	/**
@@ -107,8 +104,12 @@ public class Mueble {
 	 */
 	public String abrir() {
 		String cadena = "";
-		if(sePuedeAbrir()) {
-			cadena += "Este " + nombre.toLowerCase() + " tiene: " + 
+		if(abierto) {
+			cadena += "Este mueble ya estaba abierto. Tiene: " + 
+				listarContenido();
+		} else if(sePuedeAbrir()) {
+			abierto = true;
+			cadena += "Este mueble tiene: " + 
 				listarContenido();
 		} else {
 			cadena += "Necesitare de una llave para abrir este " + 
@@ -127,18 +128,19 @@ public class Mueble {
 		String cadena = "";
 		if(sePuedeAbrir()) {
 			if(cerradura != null) {
-				cadena += "Ya habia abierto este " +  nombre.toLowerCase() + 
+				cadena += "Ya habia abierto este mueble" + 
 					". Tiene: " + listarContenido();
 			} else {
+				abierto = true;
 				cadena += "No necesito de una llave para abrir este " + 
 				nombre.toLowerCase() + ". Tiene: " + listarContenido();
 			}
-				cadena += "No parece ser la llave correcta";
 		} else {
 			if(cerradura.abrirCerradura(llave)) {
-				cadena = "He abierto el " + nombre.toLowerCase();
+				abierto = true;
+				cadena = "He abierto el mueble";
 			} else {
-				cadena = "No parece ser la lleve correcta";
+				cadena = "No parece ser la llave correcta";
 			}
 		}
 		return cadena;
@@ -146,11 +148,13 @@ public class Mueble {
 	
 	public String verContenido() {
 		String cadena = "";
-		if(sePuedeAbrir()) {
-			cadena = "Este " + nombre.toLowerCase() + "tiene: " + 
+		if(!abierto) {
+			cadena = "Esta cerrado pero puedo abrirlo ahora mismo";
+		} else if(sePuedeAbrir()) {
+			cadena = "Este mueble tiene: " + 
 				listarContenido();
 		} else {
-			cadena = "Esta cerrado y no puedo ver su contenido";
+			cadena = "Esta cerrado con llave y no puedo ver su contenido ahora";
 		}
 		return cadena;
 	}
@@ -173,14 +177,14 @@ public class Mueble {
 		Object[] regreso = new Object[2];
 		String cadena = "No encuentro ningun objeto como ese aqui";
 		Item item = null;
-		if(!sePuedeAbrir()) {
-			cadena = "No puedo abrir este mueble";
+		if(!abierto) {
+			cadena = "Aun no he abierto este mueble";
 		} else if(!contenido.isEmpty()) {
 			Iterator<Item> it = contenido.iterator();
 			while(it.hasNext()) {
 				Item temp = it.next();
-				if(temp.equals(objeto)){
-					cadena = "He tomado: " + objeto.toLowerCase();
+				if(temp.validarItemCadena(objeto)){
+					cadena = "He tomado: " + temp.toString().toLowerCase();
 					item = temp;
 					break;
 				}
@@ -196,5 +200,20 @@ public class Mueble {
 	
 	public void agregarObjeto(Item item) {
 		if(item != null) contenido.add(item);
+	}
+	
+	public String toString() {
+		return nombre + "/ tiene: " + listarContenido();
+	}
+	
+	public boolean validarMuebleCadena(String cadena) {
+		if(!cadena.equalsIgnoreCase("mueble")) {
+			if(!cadena.equalsIgnoreCase(nombre.split(" ")[0])) {
+				if(!cadena.equalsIgnoreCase(nombre)) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 }

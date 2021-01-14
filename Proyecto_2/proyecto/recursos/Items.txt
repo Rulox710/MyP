@@ -1,7 +1,7 @@
 >
 01:Planta verde:Una planta de un color verde intenso:1
 02:Planta roja:Una planta de u color rojo carmesi:0
-03:Mezcla amarillente:El resultado de mezclar una planta planta roja con una verde:3
+03:Mezcla amarillenta:El resultado de mezclar una planta planta roja con una verde:3
 04:Mezcla verdoza:El resultado de mezclar dos plantas verdes:2
 05:Mezcla rojiza:El resultado de mezclar dos planas rojas:-1
 >

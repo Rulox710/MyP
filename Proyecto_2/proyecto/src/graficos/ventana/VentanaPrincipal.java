@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
+import juego.cronometro.Cronometro;
 import graficos.control.GestorVentana;
 
 public class VentanaPrincipal extends Ventana{
@@ -71,12 +72,12 @@ public class VentanaPrincipal extends Ventana{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == botonIniciar) {
-			cronometro.iniciarCronometro();
+			Cronometro.instancia.iniciarCronometro();
 			gv.mostrarVentana(1);
 			//gv.cambiarEstado(new EnJuego(gv));
 		}
 		if (e.getSource() == botonSalir) {
-			cronometro.terminarCronometro();
+			Cronometro.instancia.terminarCronometro();
 			System.exit(0);
 		}
 	}

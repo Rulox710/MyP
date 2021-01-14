@@ -1,25 +1,18 @@
 package juego.cronometro;
 
 import java.lang.IllegalThreadStateException;
-
 import java.lang.Thread;
 
 import principal.Juego;
 
 public final class Cronometro extends Thread{
 	
-	private static Cronometro instancia; 
+	public static Cronometro instancia = new Cronometro(); 
+	
 	private boolean enFuncionamiento, hiloActivo = false;
 	private Juego juego;
 	
 	private Cronometro() {}
-	
-	public static Cronometro obtenerInstancia() {
-		if(instancia == null) {
-			instancia = new Cronometro();
-		} 
-		return instancia;
-	}
 	
 	public void agregarJuego(Juego juego) {
 		this.juego = juego;

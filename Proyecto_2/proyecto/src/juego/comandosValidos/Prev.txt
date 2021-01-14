@@ -1,0 +1,151 @@
+if(sePuedeProcesarCadena(str[0])) {
+			if(comandosValidos.get(contador++).igual(str[0])) {//ayuda
+				if(str.length == 1) {
+					resultado = "Los comandos que puede usar son: ";
+					Iterator it = comandosValidos.iterator();
+					while(it.hasNext()) {
+						resultado += it.next();
+						if(it.hasNext()) resultado += ", ";
+					}
+				} else {
+					cc = "b";
+				}
+			} else if(comandosValidos.get(contador++).igual(str[0])) {//inventario
+				
+			} else if(comandosValidos.get(contador++).igual(str[0])) {//vida
+				if(str.length == 1 || str[1].equalsIgnoreCase("actual")) {
+					resultado = jugador.obtenerVida();
+				} else {
+					cc = "b";
+				}
+			} else if(comandosValidos.get(contador++).igual(str[0])) {//regresar
+				if(str.length <= 4) {
+					String tem = "";
+					switch(str.length) {
+						case 4: tem = str[1] + " " + str[2] + " " + str[3]; break;
+					}
+					if(tem.equalsIgnoreCase("al Cuarto Anterior") || tem.equals("")) {
+						resultado = jugador.regresar();
+					} else {
+						cc = "b";
+					}
+				} else {
+					cc = "b";
+				}
+			} else if(comandosValidos.get(contador++).igual(str[0])) {//ir
+				if(str.length <= 4) {
+					String tem = "";
+					switch(str.length) {
+						case 3: tem = str[1]; break;
+						case 4: tem = str[1] + " " + str[2]; break;
+					}
+					if(tem.equalsIgnoreCase("al") || tem.equalsIgnoreCase("hacia El")) {
+						resultado = jugador.cambiarCuarto(str[str.length-1]);
+					} else {
+						cc = "b";
+					}
+				} else {
+					cc = "b";
+				}
+			} else if(comandosValidos.get(contador++).igual(str[0])) {//comer
+				
+			} else if(comandosValidos.get(contador++).igual(str[0])) {//leer
+				String fin = "";
+				if(str.length != 1) {
+					for(int i = 1 ; i < str.length; i++) {
+						fin += " " + str[i];
+					}
+					resultado = jugador.leerNota(fin.trim());
+				} else {
+					cc = "b";
+				}
+				} else if(comandosValidos.get(contador++).igual(str[0])) {//observar
+				int art = 1;
+				String fin = "";
+				if(str.length == 3) {
+					art += (str[1].equalsIgnoreCase("el"))? 1: 0;   
+				}
+				for(int i = art ; i < str.length; i++) {
+					fin += " " + str[i];
+				}
+				boolean c = (fin.trim().equals("") || fin.trim().equalsIgnoreCase("cuarto"));
+				boolean m = (jugador.validarMueble(fin.trim()));
+				if(c && (str.length <= 2 || art == 2)) {
+					resultado = jugador.describirCuarto();
+				} else if(m && art == 1) {
+					resultado = jugador.verContenidoMueble();
+				} else if(art == 1) {
+					resultado = jugador.leerNota(fin.trim());
+				} else {
+					cc = "b";
+				}	
+				} else if(comandosValidos.get(contador++).igual(str[0])) {//girar
+				
+			} else if(comandosValidos.get(contador++).igual(str[0])) {//pelear
+				String tem = "";
+				String fin = "";
+				for(int i = 1; i < str.length; i++) {
+					if(i+1 == str.length) {
+						fin += " " + str[i];
+					} else {
+						tem += " " + str[i];
+					}
+				}
+				boolean m = (fin.trim().equalsIgnoreCase("enemigo") || 
+					fin.trim().equalsIgnoreCase("monstruo"));
+				if(tem.trim().equals("") && (fin.trim().equals("") || m)) {
+					resultado = jugador.atacar(false);
+				} else if(m && (tem.trim().equalsIgnoreCase("al") ||
+					tem.trim().equalsIgnoreCase("con El") || 
+					tem.trim().equalsIgnoreCase("a Ese") || 
+					tem.trim().equalsIgnoreCase("contra El") || 
+					tem.trim().equalsIgnoreCase("en Contra Del"))) {
+					resultado = jugador.atacar(false);
+				} else {
+					cc = "b";
+				}
+			} else if(comandosValidos.get(contador++).igual(str[0])) { //agarrar
+				String fin = "";
+				String[] cop;
+				if(str.length != 1) {
+					boolean adverbio = (str[1].equals("") || str[1].equalsIgnoreCase("el")
+					|| str[1].equalsIgnoreCase("un") || str[1].equalsIgnoreCase("una")
+					|| str[1].equalsIgnoreCase("la"));
+					if(adverbio) {
+						cop = new String[str.length-2];
+						System.arraycopy(str,2,cop,0,str.length-2);
+					} else {
+						cop = new String[str.length-1];
+						System.arraycopy(str,1,cop,0,str.length-1);
+					}
+					for(String c: cop) {
+						fin += " " + c;
+					}
+					resultado = jugador.tomarObjeto(fin.trim());
+				} else {
+					cc = "b";
+				}
+				} else if(comandosValidos.get(contador++).igual(str[0])) { //abrir
+				if(str.length != 1) {
+					String union = "";
+					for(int i = 1; i < str.length; i++) {
+						union += " " + str[i]; 
+					}
+					String[] con = union.trim().split("con");
+					if(con.length == 1) {
+						resultado = jugador.abrirMueble(con[0],"");
+					} else {
+						resultado = jugador.abrirMueble(con[0],con[1]);
+					}
+				} else {
+					cc = "b";
+				}
+					
+			} else if(comandosValidos.get(contador++).igual(str[0])) {//buscar
+				
+			}
+		} else {
+			cc = "b";
+		}
+		String[] a = {cc,resultado};
+		return a;

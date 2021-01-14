@@ -13,9 +13,6 @@ public class Juego {
 	private Enemigo enemigo;
 	private GestorVentana gv;
 	private Logica lg;
-	private Cronometro cronometro = Cronometro.obtenerInstancia();
-	
-	private LectorRecursos lr = new LectorRecursos();
 	
 	private boolean enFuncionamiento = false;
 	
@@ -23,7 +20,7 @@ public class Juego {
 	
 	public Juego(GestorVentana gv) {
 		this.gv = gv;
-		cronometro.agregarJuego(this);
+		Cronometro.instancia.agregarJuego(this);
 		prepararJuego();
 	}
 	
@@ -43,9 +40,10 @@ public class Juego {
 	}
 	
 	private void prepararJuego() {
-		lg = new Logica(lr.obtenerComandosValidos());
-		jugador = new Jugador(lr.obtenerCasa().get(3));
-		enemigo = new Enemigo(lr.obtenerCasa().get(1));
+		LectorRecursos.iniciar();
+		lg = new Logica();
+		jugador = new Jugador(LectorRecursos.obtenerCasa().get(3));
+		enemigo = new Enemigo(LectorRecursos.obtenerCasa().get(1));
 	}
 	
 	private void enviarCadenaConsola(String cadena) {
@@ -57,13 +55,12 @@ public class Juego {
 	}
 	
 	private boolean acciones(String cadena) {
-		String[] arreglo = lg.acciones(cadena, jugador);
-		if(arreglo[0].equals("a")) {
-			enviarCadenaJuego(arreglo[1]);
-			enviarCadenaConsola(enemigo.ubicacion());
+		String resultado = lg.acciones(cadena, jugador);
+		if(lg.obtenerEsParaJuego()) {
+			enviarCadenaJuego(resultado);
 			return true;
 		} else {
-			enviarCadenaConsola(arreglo[1]);
+			enviarCadenaConsola(resultado);
 			return false;
 		}
 	}

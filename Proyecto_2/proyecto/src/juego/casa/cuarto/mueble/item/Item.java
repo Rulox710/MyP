@@ -32,6 +32,12 @@ public abstract class Item {
 		return descripcion;
 	}
 	
+	public boolean validarItemCadena(String obj) {
+		return ((String)obj).equalsIgnoreCase(nombre) 
+			|| ((String)obj).equalsIgnoreCase("objeto") 
+			|| ((String)obj).equalsIgnoreCase(nombre.split(" ")[0]);
+	}
+	
 	/**
 	 * Metodo para determinar si un <code>Item</code> es igual a un Objeto
 	 */
@@ -39,8 +45,6 @@ public abstract class Item {
 	public boolean equals(Object obj) {
 		if(obj instanceof Item) {
 			return (((Item)obj).id == this.id);
-		} else if(obj instanceof String) {
-			return ((String)obj).equals(this.nombre);
 		}
 		return false;
 	}

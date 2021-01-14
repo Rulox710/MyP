@@ -9,15 +9,17 @@ import juego.inventario.Inventario;
 
 public class Jugador extends Ente {
 	//llaves herramientas consumibles
-	private Inventario[] inventario = new Inventario[3];
+	private Inventario[] inventario = new Inventario[4];
+	private Herramienta equipo = null;
 	
 	public Jugador(Cuarto cuarto) {
 		super(cuarto);
-		vida = 5;
-		ataque = 3;
-		inventario[0] = new Inventario(10);
-		inventario[1] = new Inventario(2);
-		inventario[2] = new Inventario(6);
+		vida = 50;
+		ataque = 1;
+		inventario[0] = new Inventario<Llave>(10);
+		inventario[1] = new Inventario<Herramienta>(2);
+		inventario[2] = new Inventario<Consumible>(6);
+		inventario[3] = new Inventario<Nota>(10);
 	}
 	
 	public String describirCuarto() {
@@ -29,21 +31,48 @@ public class Jugador extends Ente {
 		return str;
 	}
 	
-	public String abrirMueble(String llave) {
+	public String equiparHerramienta(String herramienta) {
+		String dicho = "No tengo esa herramienta";
+		int i = inventario[2].indicePorCadena(herramienta);
+		Herramienta usar = (Herramienta)inventario[2].retirar(i);
+		if(usar != null) {
+			dicho = "Me he equipado " + usar.toString();
+			equipo = usar;
+		}
+		return dicho;
+	}
+	
+	public boolean validarMueble(String mueble) {
+		return ubicacion.obtenerMueble().validarMuebleCadena(mueble);
+	}
+	
+	public String verContenidoMueble() {
+		return ubicacion.obtenerMueble().verContenido();
+	}
+	
+	public String leerNota(String nota) {
+		String dicho = "No tengo ninguna nota que leer con ese nombre";
+		int i = inventario[3].indicePorCadena(nota);
+		Nota usar = (Nota)inventario[3].retirar(i);
+		if(usar != null) {
+			dicho = usar.obtenerDescripcion();
+			inventario[3].agregar(usar);
+		}
+		return dicho;
+	}
+	
+	public String abrirMueble(String mueble, String llave) {
+		if(!validarMueble(mueble)) return "No se que debo abrir";
 		String cadena = "";
 		if(llave.length() == 0) {
 			cadena = ubicacion.obtenerMueble().abrir();
 		} else {
-			Llave usar = null;
-			Iterator<Item> it = inventario[2].obtenerIterador();
-			while(it.hasNext()) {
-				Item item = it.next();
-				if(item.equals(llave)) {
-					usar = (Llave)item;
-					break;
-				}
-			}
+			int i = inventario[2].indicePorCadena(llave);
+			Llave usar = (Llave)inventario[2].retirar(i);
 			cadena = ubicacion.obtenerMueble().abrir(usar);
+			if(!ubicacion.obtenerMueble().obtenerAbierto()) {
+				inventario[2].agregar(usar);
+			}
 		}
 		return cadena;
 	}
@@ -54,10 +83,12 @@ public class Jugador extends Ente {
 		if(procesar[0] != null) {
 			if(procesar[0] instanceof Consumible) {
 				tomado = inventario[0].agregar((Consumible)procesar[0]);
-			} else if (procesar[0] instanceof Herramienta) {
+			} else if(procesar[0] instanceof Herramienta) {
 				tomado = inventario[1].agregar((Herramienta)procesar[0]);
-			} else {
+			} else if(procesar[0] instanceof Llave) {
 				tomado = inventario[2].agregar((Llave)procesar[0]);
+			} else {
+				tomado = inventario[3].agregar((Nota)procesar[0]);
 			}
 			if(!tomado) {
 				ubicacion.obtenerMueble().agregarObjeto((Item)procesar[0]);
@@ -70,17 +101,19 @@ public class Jugador extends Ente {
 	
 	public String atacar(boolean contraataque) {
 		String str = "";
+		int danio = ataque;
+		if(equipo != null) danio += equipo.obtenerDanio(); 
 		Ente enemigo = ubicacion.obtenerEnteAjeno(this);
 		if(enemigo != null) {
 			if(enemigo.muerto()) return "Aunque le siga atacando, se levantara";
-			enemigo.recibirDanio(ataque, contraataque);
+			enemigo.recibirDanio(danio,contraataque);
 			str += "Le he atacado";
 			if(enemigo.muerto()) {
 				str += " y lo he derribado, pero parece como si se fuese a le" +
 					"vantar en cualquier momento";
 			} else {
 				if(!contraataque)
-					str += " y ahora parace dispuesto a contraatacar";
+					str += " y tambien me ha atacado";
 			}
 		} else {
 			str += "\u00BFPero a que debo atacar?";
@@ -141,5 +174,4 @@ public class Jugador extends Ente {
 		if(vida <= 2) v = "Estoy en peligro";
 		return v;
 	}
-
 }

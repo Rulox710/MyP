@@ -29,10 +29,7 @@ public abstract class Ente {
 			if(!contraataque) {
 				str += "Esa cosa me ha atacado, tengo que contraatacar\n";
 				str += atacar(true);
-			} else {
-				str += "Me ha atacado en represalia";
-			}
-			
+			} 
 		}
 		return str;
 	}
@@ -44,9 +41,7 @@ public abstract class Ente {
 	public abstract String obtenerVida();
 	
 	public String buscarSalidas() {
-		if(muerto()) return "Fin del juego";
-		return "Parece ser que hay salidas hacia el " + 
-			ubicacion.mostrarSalidas();
+		return "Parece ser que hay salidas hacia el ".concat(ubicacion.mostrarSalidas());
 	}
 	
 	public abstract String cambiarCuarto(String direccion);

@@ -13,7 +13,7 @@ public class Enemigo extends Ente{
 	public Enemigo(Cuarto cuarto) {
 		super(cuarto);
 		vida = 5;
-		ataque = 0;
+		ataque = 3;
 	}
 	
 	public String obtenerVida() {

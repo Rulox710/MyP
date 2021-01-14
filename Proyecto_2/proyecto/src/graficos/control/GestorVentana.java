@@ -45,6 +45,7 @@ public class GestorVentana {
 	}
 	
 	public void enviarCadenaJuego(String cadena) {
+		
 		((VentanaJuego)ventanas[1]).escribirEnJuego(cadena);
 	}
 	

@@ -12,28 +12,35 @@ import juego.casa.cuarto.Cuarto;
 import juego.casa.cuarto.mueble.Mueble;
 import juego.casa.cuarto.mueble.item.*;
 
-public class LectorRecursos {
+public final class LectorRecursos {
 	
-	private ArrayList<Comando> comandosValidos = new ArrayList<>();
-	private ArrayList<Cuarto> casa = new ArrayList<>();
-	private ArrayList<Mueble> muebles = new ArrayList<>();
-	private ArrayList<Item> items = new ArrayList<>();
+	private static ArrayList<Comando> comandosValidos = new ArrayList<>();
+	private static ArrayList<Cuarto> casa = new ArrayList<>();
+	private static ArrayList<Mueble> muebles = new ArrayList<>();
+	private static ArrayList<Item> items = new ArrayList<>();
 	   
-    private String separador = System.getProperty("file.separator");
+    private static String separador = System.getProperty("file.separator");
 	
-	public LectorRecursos() {
-		iniciar();
-	}
+	private static boolean iniciado = false;
 	
-	public ArrayList<Comando> obtenerComandosValidos() {
+	public static ArrayList<Comando> obtenerComandosValidos() {
 		return comandosValidos;
 	}
 	
-	public ArrayList<Cuarto> obtenerCasa() {
+	public static ArrayList<Cuarto> obtenerCasa() {
 		return casa;
 	}
 	
-	private void iniciar() {
+	public static ArrayList<Mueble> obtenerMuebles() {
+		return muebles;
+	}
+	
+	public static ArrayList<Item> obtenerItems() {
+		return items;
+	}
+	
+	public static void iniciar() {
+		if(iniciado) return;
 		try {
 			Scanner in = new Scanner(new File("recursos" + separador + "Comandos.txt")); 
 			while(in.hasNext()) {
@@ -84,9 +91,11 @@ public class LectorRecursos {
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		
+		asignarMuebles();
 	}
 	
-	public void iniciarComando(String cadena) {
+	private static void iniciarComando(String cadena) {
 		String[] separada = cadena.split("<");
 		Comando comando = new Comando(separada[0]);
 		if (separada.length == 2) {
@@ -98,13 +107,13 @@ public class LectorRecursos {
 		comandosValidos.add(comando);
 	}
 	
-	public void iniciarCuarto(String cadena) {
+	private static void iniciarCuarto(String cadena) {
 		String[] separada = cadena.split(":");
-		Cuarto cuarto = new Cuarto(separada[0],separada[1],"Por defecto");
+		Cuarto cuarto = new Cuarto(separada[0],separada[1],separada[2]);
 		casa.add(cuarto);
 	}
 	
-	public void conectarCuartos(String cadena) {
+	private static void conectarCuartos(String cadena) {
 		String[] separada = cadena.split(":");;
 		Cuarto asignar = null;
 		for(Cuarto c1: casa) {
@@ -113,15 +122,15 @@ public class LectorRecursos {
 				break;
 			}
 		}
-		String[] salidas1 = separada[2].split(",");
+		String[] salidas1 = separada[3].split(",");
 		for(String cuarto: salidas1) {
 			String[] dir = cuarto.split("-");
 			try {
 				asignar.asignarSalidaV(dir[0].charAt(0),casa.get(Integer.parseInt(dir[1])-1));
 			} catch(Exception e) {}
 		}
-		if(separada.length == 4) {
-			salidas1 = separada[3].split(",");
+		if(separada.length == 5) {
+			salidas1 = separada[4].split(",");
 			for(String cuarto: salidas1) {
 				String[] dir = cuarto.split("-");
 				try {
@@ -131,7 +140,7 @@ public class LectorRecursos {
 		}
 	}
 	
-	private void iniciarMuebles(String mueble) {
+	private static void iniciarMuebles(String mueble) {
 		Mueble m = null;
 		String[] str = mueble.split(">");
 
@@ -147,34 +156,40 @@ public class LectorRecursos {
 				m.agregarObjeto(items.get(Integer.parseInt(s)-1));
 			}
 		}
+		muebles.add(m);
 	}
 	
-	private void iniciarItems(String item, int clave) {
+	private static void iniciarItems(String item, int clave) {
 		String[] str= item.split(":");
 		switch(clave) {
 			case 1:
 			Consumible c = new Consumible(Integer.parseInt(str[0]),str[1],str[2]);
 			c.asignarCura(Integer.parseInt(str[3]));
 			items.add(c);
-			System.out.println(c);
 			break;
 			case 3:
 			Llave l = new Llave(Integer.parseInt(str[0]),str[1],str[2]);
 			if(str.length == 4) l.asignarClave(str[3]);
 			items.add(l);
-			System.out.println(l);
 			break;
 			case 2:
 			Herramienta h = new Herramienta(Integer.parseInt(str[0]),str[1],str[2]);
 			h.asignarDanio(Integer.parseInt(str[3]));
 			items.add(h);
-			System.out.println(h);
 			break;
 			case 4:
 			Nota n = new Nota(Integer.parseInt(str[0]),str[1],str[2]);
 			items.add(n);
-			System.out.println(n);
 			break;
+		}
+	}
+	
+	private static void asignarMuebles() {
+		Iterator<Cuarto> itCasa = casa.iterator();
+		Iterator<Mueble> itMuebles = muebles.iterator();
+		int i = 0;
+		while(itCasa.hasNext()) {
+			itCasa.next().asignarMueble(itMuebles.next());
 		}
 	}
 }

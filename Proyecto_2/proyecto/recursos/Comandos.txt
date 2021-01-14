@@ -4,9 +4,10 @@ vida<
 regresar<
 ir<caminar
 comer<ingerir
-incendiar<quemar,prender
 leer<
-observar<ver,mirar,contemplar
-entrar<
-girar<
+observar<ver,mirar
+equipar<
 pelear<golpear,atacar
+agarrar<tomar,asir
+abrir<
+buscar<

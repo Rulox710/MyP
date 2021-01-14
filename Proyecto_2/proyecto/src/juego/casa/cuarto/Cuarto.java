@@ -86,11 +86,16 @@ public class Cuarto {
 		String cadena = ""; 
 		Set lados1 = salidasV.keySet();
 		Set lados2 = salidasI.keySet();
-        for(Iterator iter = lados1.iterator(); iter.hasNext(); )
-            cadena += " " + iter.next();
-        for(Iterator iter = lados2.iterator(); iter.hasNext(); )
-            cadena += " " + iter.next();
-        return cadena;
+        Iterator<String> iter1 = lados1.iterator();
+        Iterator<String> iter2 = lados2.iterator();
+        while(iter2.hasNext()) {
+			cadena = cadena.concat(iter2.next()).concat(", ");
+		}
+		while(iter1.hasNext()) {
+			cadena = cadena.concat(iter1.next());
+			if(iter1.hasNext()) cadena = cadena.concat(", ");
+		}
+		return cadena;
 	}
 	
 	public String obtenerNombre() {

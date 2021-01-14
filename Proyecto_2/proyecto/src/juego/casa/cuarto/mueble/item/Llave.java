@@ -15,4 +15,12 @@ public class Llave extends Item {
 	public String obtenerClave(){
 		return clave;
 	}
+	
+	@Override
+	public boolean validarItemCadena(String cadena) {
+		if(!super.validarItemCadena(cadena)) {
+			return ((String)cadena).equalsIgnoreCase("llave");
+		}
+		return true;
+	}
 }

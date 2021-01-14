@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import juego.cronometro.Cronometro;
 import graficos.control.GestorVentana;
 
 public class VentanaPausa extends Ventana {
@@ -41,7 +42,7 @@ public class VentanaPausa extends Ventana {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == botonReanudar) {
-			cronometro.iniciarCronometro();
+			Cronometro.instancia.iniciarCronometro();
 			gv.mostrarVentana(1);
 		}
 		if (e.getSource() == botonSalir) {
