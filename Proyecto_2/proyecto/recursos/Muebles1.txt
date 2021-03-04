@@ -1,0 +1,13 @@
+Alacena>16,10
+Alacena roja,1AZ9>01,01,13
+Armario>06,08
+Cajonera de roble>18,10,07
+Cajonera>03
+Armario>
+Caja decorada,2BY8>02,14,19
+Armario grande,4DW6>07
+Caja>02,04,01,05,09
+Buro>10
+Buro de picas,4DW6>20
+Caja de pinturas>08
+Cajonera,3CX7>17,15

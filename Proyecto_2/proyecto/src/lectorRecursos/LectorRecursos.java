@@ -22,6 +22,11 @@ public final class LectorRecursos {
     private static String separador = System.getProperty("file.separator");
 	private static boolean iniciado = false;
 	
+	public static void reiniciar() {
+		casa = new ArrayList<>();
+		muebles = new ArrayList<>();
+	}
+	
 	/**
 	 * Metodo para obtener la lista de los comandos leidos
 	 * @return Un <code>ArrayList</code> de <code>Comado</code>

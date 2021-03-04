@@ -48,12 +48,12 @@ public class ConstructorLlaves implements Constructor {
 			switch(segundo) {
 				case 10: devolver = LectorRecursos.obtenerItems().get(10);
 				break;
-				case 11: devolver = LectorRecursos.obtenerItems().get(12);
+				case 11: devolver = LectorRecursos.obtenerItems().get(11);
 				break;
 			}
 			break;
 			case 11:
-			if(segundo == 10) devolver = LectorRecursos.obtenerItems().get(12);
+			if(segundo == 10) devolver = LectorRecursos.obtenerItems().get(11);
 			break;
 		}
 		return devolver;

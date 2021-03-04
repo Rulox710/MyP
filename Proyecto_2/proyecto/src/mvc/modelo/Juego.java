@@ -25,6 +25,7 @@ public class Juego {
 	}
 	
 	private void prepararJuego() {
+		LectorRecursos.reiniciar();
 		LectorRecursos.iniciar();
 		jugador = new Jugador(LectorRecursos.obtenerCasa().get(3));
 		enemigo = new Enemigo(LectorRecursos.obtenerCasa().get(1));

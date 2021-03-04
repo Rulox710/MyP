@@ -1,0 +1,7 @@
+Se calificó 80 de 100
+
+"DIAGRAMAS: 2.8 Faltan diagramas valiosos para la documentación del sistema. El diagrama de secuencias habría ilustrado la comunicación entre la interfaz y los controladores del sistema. El diagrama de casos de uso está incorrecto pues no debería tener una representación secuencial de acciones.
+JUSTIFICACIÓN: 2 La justificación para template y observer están mal. Template debería correr una rutina compuesta, tomando como base un esqueleto y delegando subrutinas a subclases. Observer funciona en ambientes donde muchos observadores son necesarios. Si sólo hay un sujeto y un observador, el patrón Observer está de más.
+IMPLEMENTACIÓN: 2.5 No estás usando correctamente template pues no hay un ""esqueleto"" que seguir para realizar las acciones, sólo se delega a la subclase específica y es la que ejecuta una rutina. Observer no es adecuado para la comunicación entre dos entidades (1 sujeto y 1 observador).
+
+Uso extra de threads: +0.7"

@@ -59,4 +59,9 @@ public abstract class Item {
 	public int obtenerId() {
 		return id;
 	}
+
+	@Override
+	public String toString() {
+		return nombre;
+	}
 }
