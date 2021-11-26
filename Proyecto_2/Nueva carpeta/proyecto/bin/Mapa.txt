@@ -1,0 +1,13 @@
+01:Cocina:Es un gran cuarto con utensilios y otros materiales de cocina. Hay una alacena:E-02:
+02:Comedor:Hay una mesa algo pequena con solo dos sillas. Hay una alacena roja:S-05,O-01:E-03
+03:Almacen de Herramientas:El cuarto esta pobremente iluminado, pero hay herramientas en todos lados. Hay un armario:S-06:O-02
+04:Entrada:Es un espacio acogedor con un par de sillas. Hay una cajonera de roble:S-07,E-05:
+05:Antesala:Es un cuarto lleno de decoraciones, ademas de una cajonera:N-02,S-08,E-06,O-04:
+06:Sala de Estar:El lugar dispone de un sillon y poco mas. Hay un armario en una esquina:N-03,O-05:S-09
+07:Biblioteca:Parece una pequena biblioteca con unos estantes con libros. Una caja decorada sobresale:N-04,E-08:
+08:Cuarto oscuro:Solo la luz de los cuarto aledanos iluminan este lugar y siento un aroma ferroso, mas puedo ver un armario grande:N-05,S-10,E-09,O-07:
+09:Jardin:Una reja rodea el lugar y no puedo salir al exterior. Todo esta lleno de plantas. Hay una caja sobre una mesa:O-08:N-06
+10:Pasillo:Un pasillo con nada mas que un buro:N-08,S-012:
+11:Dormitorio:Una cama para dos personas y un buro de picas talladas en el es todo lo que hay:E-012:
+12:Cuarto de Pintura:Esta lleno de cuadros y hay un caballta vacio. Tiene una caja de pinturas cerca este:N-10,E-13,O-11:
+13:Almacen de Pintura:Hay varias cosas que parecen cuadros cubiertas por mantas. Hay una cajonera:O-12:
